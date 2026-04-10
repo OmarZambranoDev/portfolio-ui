@@ -11,7 +11,9 @@ Shared UI component library for my micro-frontend portfolio project.
 
 ## Installation
 
-npm install @portfolio/ui
+This library requires React 18 or higher as a peer dependency.
+
+npm install react react-dom @portfolio/ui
 
 ## Usage
 ```
