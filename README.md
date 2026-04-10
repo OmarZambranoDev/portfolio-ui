@@ -29,7 +29,7 @@ function App() {
 
 ## Available Components
 
-Button - variant, size, onClick, disabled - Ready
+Button - variant, size, onClick, disabled - Ready  
 Card - Coming soon
 
 ## Development
