@@ -24,7 +24,8 @@ const button = cva(
 );
 
 export interface ButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
+  extends
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
     VariantProps<typeof button> {
   children: React.ReactNode;
   disabled?: boolean;
@@ -39,10 +40,8 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button
-      className={button({ variant, size, className })}
-      disabled={disabled}
-      {...props}
-    />
+    <button className={button({ variant, size, className })} disabled={disabled} {...props}>
+      {children}
+    </button>
   );
 };

@@ -12,8 +12,9 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build:css": "node node_modules/.bin/tailwindcss -i ./src/styles.css -o ./src/tailwind-output.css",
+    "storybook": "npm run build:css && storybook dev -p 6006",
+    "build-storybook": "npm run build:css && storybook build",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
@@ -37,10 +38,11 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "storybook": "^10.3.5",
-    "tailwindcss": "^4.2.2",
+    "tailwindcss": "^3.4.17",
     "tsup": "^8.5.1",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.1"
+    "typescript-eslint": "^8.58.1",
+    "vite": "^8.0.8"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1"
