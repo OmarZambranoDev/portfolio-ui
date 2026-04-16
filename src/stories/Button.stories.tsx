@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
-import './tailwind-output.css';
+import { Button } from '../Button';
+import '../tailwind-output.css';
 
 const meta: Meta<typeof Button> = {
   title: 'Portfolio/Button',
