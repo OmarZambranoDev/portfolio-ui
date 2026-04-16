@@ -49,5 +49,13 @@
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/index.css": "./dist/index.css"
   }
 }
