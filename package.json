@@ -6,6 +6,15 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/index.css": "./dist/index.css",
+    "./dist/index.mjs": "./dist/index.mjs"
+  },
   "files": [
     "dist"
   ],
@@ -49,13 +58,5 @@
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./dist/index.css": "./dist/index.css"
   }
 }
