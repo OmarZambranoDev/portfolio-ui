@@ -26,4 +26,5 @@ storybook-static/
 # TypeScript
 *.tsbuildinfo
 
-tailwind-output.css
+tailwind-output.css*.tgz
+src/tailwind-output.css

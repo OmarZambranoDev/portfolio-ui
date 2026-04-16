@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card, CardImage, CardContent, CardTitle, CardDescription, CardFooter } from '../Card';
 import { Button } from '../Button';
-import '../tailwind-output.css';
+import '../../dist/index.css';
 
 const meta: Meta<typeof Card> = {
   title: 'Portfolio/Card',

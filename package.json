@@ -19,9 +19,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "npm run build:css && tsup",
+    "build:css": "npx tailwindcss@3.4.17 -i ./src/styles.css -o ./dist/index.css --content \"./src/**/*.tsx\"",
+    "build:js": "tsup",
+    "build": "rm -rf dist && npm run build:js && npm run build:css",
     "dev": "tsup --watch",
-    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/index.css --content \"./src/**/*.tsx\"",
     "storybook": "npm run build:css && storybook dev -p 6006",
     "build-storybook": "npm run build:css && storybook build",
     "lint": "eslint src --ext .ts,.tsx",
