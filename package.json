@@ -21,7 +21,7 @@
   "scripts": {
     "build": "npm run build:css && tsup",
     "dev": "tsup --watch",
-    "build:css": "node node_modules/.bin/tailwindcss -i ./src/styles.css -o ./dist/index.css --content \"./src/**/*.{ts,tsx}\"",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/index.css --content \"./src/**/*.tsx\"",
     "storybook": "npm run build:css && storybook dev -p 6006",
     "build-storybook": "npm run build:css && storybook build",
     "lint": "eslint src --ext .ts,.tsx",
