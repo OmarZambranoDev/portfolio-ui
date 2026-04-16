@@ -31,8 +31,10 @@ function App() {
 
 ## Available Components
 
-Button - variant, size, onClick, disabled - Ready  
-Card - Coming soon
+| Component | Description | Status |
+|-----------|-------------|--------|
+| Button | Primary, Secondary, Outline variants with sm/md/lg sizes | ✅ |
+| Card | Container with Image, Content, Title, Description, Footer sub-components | ✅ |
 
 ## Development
 
