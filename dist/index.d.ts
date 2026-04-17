@@ -42,4 +42,15 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
 }
 declare const Button: React.FC<ButtonProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps };
+declare const chip: (props?: ({
+    variant?: "default" | "outline" | "primary" | "secondary" | "accent" | null | undefined;
+    size?: "sm" | "md" | "lg" | null | undefined;
+    clickable?: boolean | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface ChipProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof chip> {
+    children: React.ReactNode;
+    disabled?: boolean;
+}
+declare const Chip: React.FC<ChipProps>;
+
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps };

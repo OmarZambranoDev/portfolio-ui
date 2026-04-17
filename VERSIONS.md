@@ -59,6 +59,32 @@ This file tracks the locked stable versions used across all portfolio micro-fron
 |---------|---------|
 | @portfolio/ui | 0.0.3 |
 
+## Components
+
+| Component | Version | Status |
+|-----------|---------|--------|
+| Button | 0.0.x | ✅ Published |
+| Card | 0.0.x | ✅ Published |
+| Chip | 0.0.9 | ✅ Ready to publish |
+
+## Custom Tailwind Colors (Earth Theme)
+
+All projects must include these custom colors in `tailwind.config.js`:
+
+```javascript
+colors: {
+  earth: {
+    forest: '#344b33',
+    sand: '#b78d6a',
+    stone: '#c5ae96',
+    sage: '#7f886e',
+    moss: '#4a5d3e',
+    clay: '#a07d5c',
+    warm: '#d4bfa8',
+  },
+}
+```
+
 ---
 
 **All projects in this portfolio MUST use these exact versions to ensure compatibility across the polyrepo architecture.**

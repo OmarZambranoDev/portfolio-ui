@@ -13,4 +13,5 @@ export {
   type CardFooterProps,
 } from './Card';
 export { Button, type ButtonProps } from './Button';
+export { Chip, type ChipProps } from './Chip';
 import './styles.css';

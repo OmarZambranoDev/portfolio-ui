@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -6,9 +8,9 @@ const button = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-        secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
-        outline: 'border border-gray-300 bg-transparent hover:bg-gray-50 focus:ring-gray-500',
+        primary: 'bg-primary text-white hover:bg-primary-hover focus:ring-primary',
+        secondary: 'bg-secondary text-white hover:bg-secondary-hover focus:ring-secondary',
+        outline: 'border border-primary text-primary bg-transparent hover:bg-muted/20 focus:ring-primary',
       },
       size: {
         sm: 'px-3 py-1.5 text-sm',
@@ -24,8 +26,7 @@ const button = cva(
 );
 
 export interface ButtonProps
-  extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
     VariantProps<typeof button> {
   children: React.ReactNode;
   disabled?: boolean;
@@ -40,8 +41,14 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button className={button({ variant, size, className })} disabled={disabled} {...props}>
+    <button
+      className={button({ variant, size, className })}
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </button>
   );
 };
+
+export default Button;
