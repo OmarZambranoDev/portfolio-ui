@@ -1,9 +1,22 @@
+import { ClassValue } from 'clsx';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import React from 'react';
 import { VariantProps } from 'class-variance-authority';
 
+declare function cn(...inputs: ClassValue[]): string;
+
+declare const button: (props?: ({
+    variant?: "primary" | "secondary" | "outline" | null | undefined;
+    size?: "sm" | "md" | "lg" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>, VariantProps<typeof button> {
+    children: React.ReactNode;
+    disabled?: boolean;
+}
+declare const Button: React.FC<ButtonProps>;
+
 declare const card: (props?: ({
-    variant?: "default" | "elevated" | "outline" | null | undefined;
+    variant?: "outline" | "default" | "elevated" | null | undefined;
     clickable?: boolean | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof card> {
@@ -32,18 +45,8 @@ interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare const CardFooter: React.FC<CardFooterProps>;
 
-declare const button: (props?: ({
-    variant?: "outline" | "primary" | "secondary" | null | undefined;
-    size?: "sm" | "md" | "lg" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>, VariantProps<typeof button> {
-    children: React.ReactNode;
-    disabled?: boolean;
-}
-declare const Button: React.FC<ButtonProps>;
-
 declare const chip: (props?: ({
-    variant?: "default" | "outline" | "primary" | "secondary" | "accent" | null | undefined;
+    variant?: "primary" | "secondary" | "outline" | "default" | "accent" | null | undefined;
     size?: "sm" | "md" | "lg" | null | undefined;
     clickable?: boolean | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
@@ -53,4 +56,4 @@ interface ChipProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<
 }
 declare const Chip: React.FC<ChipProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps };
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, cn };

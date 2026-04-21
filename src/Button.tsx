@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from './lib/utils';
 
 const button = cva(
   'rounded font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2',
@@ -10,7 +11,8 @@ const button = cva(
       variant: {
         primary: 'bg-primary text-white hover:bg-primary-hover focus:ring-primary',
         secondary: 'bg-secondary text-white hover:bg-secondary-hover focus:ring-secondary',
-        outline: 'border border-primary text-primary bg-transparent hover:bg-muted/20 focus:ring-primary',
+        outline:
+          'border border-primary text-primary bg-transparent hover:bg-muted/20 focus:ring-primary',
       },
       size: {
         sm: 'px-3 py-1.5 text-sm',
@@ -41,11 +43,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button
-      className={button({ variant, size, className })}
-      disabled={disabled}
-      {...props}
-    >
+    <button className={cn(button({ variant, size }), className)} disabled={disabled} {...props}>
       {children}
     </button>
   );

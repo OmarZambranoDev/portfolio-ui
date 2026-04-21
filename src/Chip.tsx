@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from './lib/utils';
 
 const chip = cva(
   'inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2',
@@ -48,7 +49,7 @@ export const Chip: React.FC<ChipProps> = ({
 }) => {
   return (
     <span
-      className={chip({ variant, size, clickable, className })}
+      className={cn(chip({ variant, size, clickable }), className)}
       aria-disabled={disabled}
       {...props}
     >
