@@ -73,8 +73,32 @@ export const Disabled: Story = {
   args: {
     children: 'Disabled',
     variant: 'primary',
-    size: 'md',
     disabled: true,
+  },
+};
+
+export const DisabledSecondary: Story = {
+  args: {
+    children: 'Disabled',
+    variant: 'secondary',
+    disabled: true,
+  },
+};
+
+export const DisabledOutline: Story = {
+  args: {
+    children: 'Disabled',
+    variant: 'outline',
+    disabled: true,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    children: 'Loading',
+    loading: true,
+    variant: 'primary',
+    size: 'md',
   },
 };
 

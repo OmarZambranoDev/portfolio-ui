@@ -8,10 +8,12 @@ declare function cn(...inputs: ClassValue[]): string;
 declare const button: (props?: ({
     variant?: "primary" | "secondary" | "outline" | null | undefined;
     size?: "sm" | "md" | "lg" | null | undefined;
+    disabled?: boolean | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>, VariantProps<typeof button> {
     children: React.ReactNode;
     disabled?: boolean;
+    loading?: boolean;
 }
 declare const Button: React.FC<ButtonProps>;
 
