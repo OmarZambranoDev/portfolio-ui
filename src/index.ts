@@ -39,3 +39,4 @@ export {
   type TabsTriggerProps,
   type TabsContentProps,
 } from './Tabs';
+export { SearchBar, type SearchBarProps } from './SearchBar';

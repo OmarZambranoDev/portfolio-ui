@@ -126,4 +126,24 @@ interface TabsContentProps {
 }
 declare const TabsContent: React.FC<TabsContentProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, Modal, ModalBody, type ModalBodyProps, ModalDescription, type ModalDescriptionProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, type TabsProps, TabsTrigger, type TabsTriggerProps, cn };
+declare const searchBarInput: (props?: ({
+    variant?: "default" | "minimal" | "filled" | null | undefined;
+    size?: "sm" | "md" | "lg" | null | undefined;
+    hasSearchIcon?: boolean | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface SearchBarProps extends VariantProps<typeof searchBarInput> {
+    value: string;
+    onChange: (value: string) => void;
+    onSearch?: (value: string) => void;
+    placeholder?: string;
+    debounceMs?: number;
+    showSearchIcon?: boolean;
+    showClearButton?: boolean;
+    loading?: boolean;
+    suggestions?: string[];
+    onSuggestionSelect?: (suggestion: string) => void;
+    className?: string;
+}
+declare const SearchBar: React.FC<SearchBarProps>;
+
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, Modal, ModalBody, type ModalBodyProps, ModalDescription, type ModalDescriptionProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, SearchBar, type SearchBarProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, type TabsProps, TabsTrigger, type TabsTriggerProps, cn };

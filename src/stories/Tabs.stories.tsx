@@ -1,5 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import {
+  Grid,
+  List,
+  Music,
+  PlaySquare,
+  ListMusic,
+  Users,
+  TrendingUp,
+  Clock,
+  Search,
+  MapPin,
+  CreditCard,
+  CheckCircle,
+} from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../Tabs';
 import { Button } from '../Button';
 import { Card, CardContent, CardTitle, CardDescription } from '../Card';
@@ -32,9 +46,15 @@ export const Underline: Story = {
     children: (
       <>
         <TabsList>
-          <TabsTrigger value="songs">All Songs</TabsTrigger>
-          <TabsTrigger value="playlists">Playlists</TabsTrigger>
-          <TabsTrigger value="queue">Queue</TabsTrigger>
+          <TabsTrigger value="songs" icon={<Music className="w-4 h-4" />}>
+            All Songs
+          </TabsTrigger>
+          <TabsTrigger value="playlists" icon={<PlaySquare className="w-4 h-4" />}>
+            Playlists
+          </TabsTrigger>
+          <TabsTrigger value="queue" icon={<ListMusic className="w-4 h-4" />}>
+            Queue
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="songs">
           <p className="text-secondary">All your songs will appear here.</p>
@@ -57,9 +77,15 @@ export const Pills: Story = {
     children: (
       <>
         <TabsList>
-          <TabsTrigger value="following">Following</TabsTrigger>
-          <TabsTrigger value="trending">Trending</TabsTrigger>
-          <TabsTrigger value="latest">Latest</TabsTrigger>
+          <TabsTrigger value="following" icon={<Users className="w-4 h-4" />}>
+            Following
+          </TabsTrigger>
+          <TabsTrigger value="trending" icon={<TrendingUp className="w-4 h-4" />}>
+            Trending
+          </TabsTrigger>
+          <TabsTrigger value="latest" icon={<Clock className="w-4 h-4" />}>
+            Latest
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="following">
           <p className="text-secondary">Posts from people you follow.</p>
@@ -82,10 +108,18 @@ export const Enclosed: Story = {
     children: (
       <>
         <TabsList>
-          <TabsTrigger value="search">Search</TabsTrigger>
-          <TabsTrigger value="select">Select</TabsTrigger>
-          <TabsTrigger value="payment">Payment</TabsTrigger>
-          <TabsTrigger value="confirm">Confirm</TabsTrigger>
+          <TabsTrigger value="search" icon={<Search className="w-4 h-4" />}>
+            Search
+          </TabsTrigger>
+          <TabsTrigger value="select" icon={<MapPin className="w-4 h-4" />}>
+            Select
+          </TabsTrigger>
+          <TabsTrigger value="payment" icon={<CreditCard className="w-4 h-4" />}>
+            Payment
+          </TabsTrigger>
+          <TabsTrigger value="confirm" icon={<CheckCircle className="w-4 h-4" />}>
+            Confirm
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="search">
           <div className="border border-muted rounded-lg p-4">
@@ -116,32 +150,10 @@ export const WithIcons: Story = {
   render: () => (
     <Tabs defaultValue="grid" variant="pills">
       <TabsList>
-        <TabsTrigger
-          value="grid"
-          icon={
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <rect x="3" y="3" width="7" height="7" />
-              <rect x="14" y="3" width="7" height="7" />
-              <rect x="3" y="14" width="7" height="7" />
-              <rect x="14" y="14" width="7" height="7" />
-            </svg>
-          }
-        >
+        <TabsTrigger value="grid" icon={<Grid className="w-4 h-4" />}>
           Grid
         </TabsTrigger>
-        <TabsTrigger
-          value="list"
-          icon={
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <line x1="8" y1="6" x2="21" y2="6" />
-              <line x1="8" y1="12" x2="21" y2="12" />
-              <line x1="8" y1="18" x2="21" y2="18" />
-              <circle cx="4" cy="6" r="1.5" />
-              <circle cx="4" cy="12" r="1.5" />
-              <circle cx="4" cy="18" r="1.5" />
-            </svg>
-          }
-        >
+        <TabsTrigger value="list" icon={<List className="w-4 h-4" />}>
           List
         </TabsTrigger>
       </TabsList>

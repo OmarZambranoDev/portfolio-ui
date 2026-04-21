@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useCallback } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { X } from 'lucide-react';
 import { cn } from './lib/utils';
 import { Button } from './Button';
 
@@ -161,20 +162,7 @@ export const Modal: React.FC<ModalProps> = ({
             className="absolute top-4 right-4 z-50 !p-2 !rounded-md !bg-white"
             aria-label="Close modal"
           >
-            <svg
-              className="w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <X className="w-4 h-4" />
           </Button>
         )}
         {children}
