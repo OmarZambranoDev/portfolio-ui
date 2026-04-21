@@ -29,3 +29,13 @@ export {
   type ModalBodyProps,
   type ModalFooterProps,
 } from './Modal';
+export {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  type TabsProps,
+  type TabsListProps,
+  type TabsTriggerProps,
+  type TabsContentProps,
+} from './Tabs';

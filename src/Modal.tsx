@@ -188,16 +188,9 @@ export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const ModalHeader: React.FC<ModalHeaderProps> = ({
-  children,
-  className,
-  ...props
-}) => {
+export const ModalHeader: React.FC<ModalHeaderProps> = ({ children, className, ...props }) => {
   return (
-    <div
-      className={cn('px-6 py-4 border-b border-muted', className)}
-      {...props}
-    >
+    <div className={cn('px-6 py-4 border-b border-muted', className)} {...props}>
       {children}
     </div>
   );
@@ -207,17 +200,9 @@ export interface ModalTitleProps extends React.HTMLAttributes<HTMLHeadingElement
   children: React.ReactNode;
 }
 
-export const ModalTitle: React.FC<ModalTitleProps> = ({
-  children,
-  className,
-  ...props
-}) => {
+export const ModalTitle: React.FC<ModalTitleProps> = ({ children, className, ...props }) => {
   return (
-    <h2
-      id="modal-title"
-      className={cn('text-lg font-semibold text-primary', className)}
-      {...props}
-    >
+    <h2 id="modal-title" className={cn('text-lg font-semibold text-primary', className)} {...props}>
       {children}
     </h2>
   );
@@ -233,11 +218,7 @@ export const ModalDescription: React.FC<ModalDescriptionProps> = ({
   ...props
 }) => {
   return (
-    <p
-      id="modal-description"
-      className={cn('text-sm text-secondary mt-1', className)}
-      {...props}
-    >
+    <p id="modal-description" className={cn('text-sm text-secondary mt-1', className)} {...props}>
       {children}
     </p>
   );
@@ -247,11 +228,7 @@ export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const ModalBody: React.FC<ModalBodyProps> = ({
-  children,
-  className,
-  ...props
-}) => {
+export const ModalBody: React.FC<ModalBodyProps> = ({ children, className, ...props }) => {
   return (
     <div className={cn('px-6 py-4', className)} {...props}>
       {children}
@@ -263,11 +240,7 @@ export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const ModalFooter: React.FC<ModalFooterProps> = ({
-  children,
-  className,
-  ...props
-}) => {
+export const ModalFooter: React.FC<ModalFooterProps> = ({ children, className, ...props }) => {
   return (
     <div
       className={cn('px-6 py-4 border-t border-muted flex justify-end gap-2', className)}

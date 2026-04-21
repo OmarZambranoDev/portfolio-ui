@@ -93,4 +93,37 @@ interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare const ModalFooter: React.FC<ModalFooterProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, Modal, ModalBody, type ModalBodyProps, ModalDescription, type ModalDescriptionProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, cn };
+declare const tabsContainer: (props?: ({
+    variant?: "underline" | "pills" | "enclosed" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface TabsProps extends VariantProps<typeof tabsContainer> {
+    defaultValue?: string;
+    value?: string;
+    onValueChange?: (value: string) => void;
+    children: React.ReactNode;
+    fullWidth?: boolean;
+    className?: string;
+}
+declare const Tabs: React.FC<TabsProps>;
+interface TabsListProps {
+    children: React.ReactNode;
+    className?: string;
+}
+declare const TabsList: React.FC<TabsListProps>;
+interface TabsTriggerProps {
+    value: string;
+    children: React.ReactNode;
+    disabled?: boolean;
+    icon?: React.ReactNode;
+    badge?: number | string;
+    className?: string;
+}
+declare const TabsTrigger: React.FC<TabsTriggerProps>;
+interface TabsContentProps {
+    value: string;
+    children: React.ReactNode;
+    className?: string;
+}
+declare const TabsContent: React.FC<TabsContentProps>;
+
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, Modal, ModalBody, type ModalBodyProps, ModalDescription, type ModalDescriptionProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, type TabsProps, TabsTrigger, type TabsTriggerProps, cn };
