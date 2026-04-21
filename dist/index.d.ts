@@ -58,4 +58,39 @@ interface ChipProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<
 }
 declare const Chip: React.FC<ChipProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, cn };
+declare const modalPanel: (props?: ({
+    size?: "sm" | "md" | "lg" | "xl" | "full" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface ModalProps extends VariantProps<typeof modalPanel> {
+    isOpen: boolean;
+    onClose: () => void;
+    title?: string;
+    description?: string;
+    children: React.ReactNode;
+    showCloseButton?: boolean;
+    closeOnOverlayClick?: boolean;
+    className?: string;
+}
+declare const Modal: React.FC<ModalProps>;
+interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode;
+}
+declare const ModalHeader: React.FC<ModalHeaderProps>;
+interface ModalTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+    children: React.ReactNode;
+}
+declare const ModalTitle: React.FC<ModalTitleProps>;
+interface ModalDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+    children: React.ReactNode;
+}
+declare const ModalDescription: React.FC<ModalDescriptionProps>;
+interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode;
+}
+declare const ModalBody: React.FC<ModalBodyProps>;
+interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode;
+}
+declare const ModalFooter: React.FC<ModalFooterProps>;
+
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, Modal, ModalBody, type ModalBodyProps, ModalDescription, type ModalDescriptionProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, cn };
