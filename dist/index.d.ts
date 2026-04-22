@@ -2,6 +2,9 @@ import { ClassValue } from 'clsx';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import React from 'react';
 import { VariantProps } from 'class-variance-authority';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 
 declare function cn(...inputs: ClassValue[]): string;
 
@@ -15,7 +18,7 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
     disabled?: boolean;
     loading?: boolean;
 }
-declare const Button: React.FC<ButtonProps>;
+declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
 
 declare const card: (props?: ({
     variant?: "outline" | "default" | "elevated" | null | undefined;
@@ -58,32 +61,25 @@ interface ChipProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<
 }
 declare const Chip: React.FC<ChipProps>;
 
-declare const modalPanel: (props?: ({
-    size?: "sm" | "md" | "lg" | "xl" | "full" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface ModalProps extends VariantProps<typeof modalPanel> {
-    isOpen: boolean;
-    onClose: () => void;
-    title?: string;
-    description?: string;
-    children: React.ReactNode;
-    showCloseButton?: boolean;
-    closeOnOverlayClick?: boolean;
-    className?: string;
+declare const Modal: React.FC<DialogPrimitive.DialogProps>;
+declare const ModalTrigger: React.ForwardRefExoticComponent<DialogPrimitive.DialogTriggerProps & React.RefAttributes<HTMLButtonElement>>;
+declare const ModalPortal: React.FC<DialogPrimitive.DialogPortalProps>;
+declare const ModalClose: React.ForwardRefExoticComponent<DialogPrimitive.DialogCloseProps & React.RefAttributes<HTMLButtonElement>>;
+declare const ModalOverlay: React.ForwardRefExoticComponent<Omit<DialogPrimitive.DialogOverlayProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
+interface ModalContentProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+    size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }
-declare const Modal: React.FC<ModalProps>;
+declare const ModalContent: React.ForwardRefExoticComponent<ModalContentProps & React.RefAttributes<HTMLDivElement>>;
 interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 }
 declare const ModalHeader: React.FC<ModalHeaderProps>;
-interface ModalTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
-    children: React.ReactNode;
+interface ModalTitleProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {
 }
-declare const ModalTitle: React.FC<ModalTitleProps>;
-interface ModalDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
-    children: React.ReactNode;
+declare const ModalTitle: React.ForwardRefExoticComponent<ModalTitleProps & React.RefAttributes<HTMLHeadingElement>>;
+interface ModalDescriptionProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description> {
 }
-declare const ModalDescription: React.FC<ModalDescriptionProps>;
+declare const ModalDescription: React.ForwardRefExoticComponent<ModalDescriptionProps & React.RefAttributes<HTMLParagraphElement>>;
 interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 }
@@ -92,39 +88,34 @@ interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 }
 declare const ModalFooter: React.FC<ModalFooterProps>;
+interface ModalDialogProps {
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    trigger?: React.ReactNode;
+    title?: string;
+    description?: string;
+    children?: React.ReactNode;
+    size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    showCloseButton?: boolean;
+    className?: string;
+}
+declare const ModalDialog: React.FC<ModalDialogProps>;
 
-declare const tabsContainer: (props?: ({
-    variant?: "underline" | "pills" | "enclosed" | null | undefined;
-} & class_variance_authority_types.ClassProp) | undefined) => string;
-interface TabsProps extends VariantProps<typeof tabsContainer> {
-    defaultValue?: string;
-    value?: string;
-    onValueChange?: (value: string) => void;
-    children: React.ReactNode;
+declare const Tabs: React.ForwardRefExoticComponent<TabsPrimitive.TabsProps & React.RefAttributes<HTMLDivElement>>;
+interface TabsListProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> {
+    variant?: 'underline' | 'pills' | 'enclosed';
     fullWidth?: boolean;
-    className?: string;
 }
-declare const Tabs: React.FC<TabsProps>;
-interface TabsListProps {
-    children: React.ReactNode;
-    className?: string;
-}
-declare const TabsList: React.FC<TabsListProps>;
-interface TabsTriggerProps {
-    value: string;
-    children: React.ReactNode;
-    disabled?: boolean;
+interface TabsTriggerProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> {
+    variant?: 'underline' | 'pills' | 'enclosed';
     icon?: React.ReactNode;
     badge?: number | string;
-    className?: string;
 }
-declare const TabsTrigger: React.FC<TabsTriggerProps>;
-interface TabsContentProps {
-    value: string;
-    children: React.ReactNode;
-    className?: string;
+interface TabsContentProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content> {
 }
-declare const TabsContent: React.FC<TabsContentProps>;
+declare const TabsList: React.ForwardRefExoticComponent<TabsListProps & React.RefAttributes<HTMLDivElement>>;
+declare const TabsTrigger: React.ForwardRefExoticComponent<TabsTriggerProps & React.RefAttributes<HTMLButtonElement>>;
+declare const TabsContent: React.ForwardRefExoticComponent<TabsContentProps & React.RefAttributes<HTMLDivElement>>;
 
 declare const searchBarInput: (props?: ({
     variant?: "default" | "minimal" | "filled" | null | undefined;
@@ -146,4 +137,33 @@ interface SearchBarProps extends VariantProps<typeof searchBarInput> {
 }
 declare const SearchBar: React.FC<SearchBarProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, Modal, ModalBody, type ModalBodyProps, ModalDescription, type ModalDescriptionProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, type ModalProps, ModalTitle, type ModalTitleProps, SearchBar, type SearchBarProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, type TabsProps, TabsTrigger, type TabsTriggerProps, cn };
+declare const DropdownMenu: React.FC<DropdownMenuPrimitive.DropdownMenuProps>;
+declare const DropdownMenuTrigger: React.ForwardRefExoticComponent<DropdownMenuPrimitive.DropdownMenuTriggerProps & React.RefAttributes<HTMLButtonElement>>;
+declare const DropdownMenuPortal: React.FC<DropdownMenuPrimitive.DropdownMenuPortalProps>;
+interface DropdownMenuContentProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content> {
+    align?: 'start' | 'center' | 'end';
+    side?: 'top' | 'right' | 'bottom' | 'left';
+}
+declare const DropdownMenuContent: React.ForwardRefExoticComponent<DropdownMenuContentProps & React.RefAttributes<HTMLDivElement>>;
+interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> {
+    destructive?: boolean;
+    icon?: React.ReactNode;
+    shortcut?: string;
+    inset?: boolean;
+}
+declare const DropdownMenuItem: React.ForwardRefExoticComponent<DropdownMenuItemProps & React.RefAttributes<HTMLDivElement>>;
+interface DropdownMenuLabelProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> {
+    inset?: boolean;
+}
+declare const DropdownMenuLabel: React.ForwardRefExoticComponent<DropdownMenuLabelProps & React.RefAttributes<HTMLDivElement>>;
+interface DropdownMenuSeparatorProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator> {
+}
+declare const DropdownMenuSeparator: React.ForwardRefExoticComponent<DropdownMenuSeparatorProps & React.RefAttributes<HTMLDivElement>>;
+declare const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuSubProps>;
+declare const DropdownMenuSubTrigger: React.ForwardRefExoticComponent<Omit<DropdownMenuPrimitive.DropdownMenuSubTriggerProps & React.RefAttributes<HTMLDivElement>, "ref"> & {
+    inset?: boolean | undefined;
+    icon?: React.ReactNode;
+} & React.RefAttributes<HTMLDivElement>>;
+declare const DropdownMenuSubContent: React.ForwardRefExoticComponent<Omit<DropdownMenuPrimitive.DropdownMenuSubContentProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
+
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, SearchBar, type SearchBarProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, cn };

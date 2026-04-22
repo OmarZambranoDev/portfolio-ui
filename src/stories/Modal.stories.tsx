@@ -1,6 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Modal, ModalHeader, ModalTitle, ModalDescription, ModalBody, ModalFooter } from '../Modal';
+import {
+  Modal,
+  ModalTrigger,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalDescription,
+  ModalBody,
+  ModalFooter,
+  ModalClose,
+  ModalDialog,
+} from '../Modal';
 import { Button } from '../Button';
 import '../../dist/index.css';
 
@@ -10,64 +21,53 @@ const meta: Meta<typeof Modal> = {
   parameters: {
     layout: 'centered',
   },
-  argTypes: {
-    size: {
-      control: { type: 'select' },
-      options: ['sm', 'md', 'lg', 'xl', 'full'],
-    },
-    showCloseButton: {
-      control: 'boolean',
-    },
-    closeOnOverlayClick: {
-      control: 'boolean',
-    },
-  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
-// Wrapper component for interactive stories
-const ModalWrapper = ({
-  children,
-  buttonText = 'Open Modal',
-  ...props
-}: {
-  children: React.ReactNode;
-  buttonText?: string;
-  [key: string]: any;
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <>
-      <Button onClick={() => setIsOpen(true)}>{buttonText}</Button>
-      <Modal {...props} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        {children}
-      </Modal>
-    </>
-  );
+export const Basic: Story = {
+  render: () => (
+    <Modal>
+      <ModalTrigger asChild>
+        <Button>Open Modal</Button>
+      </ModalTrigger>
+      <ModalContent>
+        <ModalHeader>
+          <ModalTitle>Modal Title</ModalTitle>
+          <ModalDescription>This is a description of the modal content.</ModalDescription>
+        </ModalHeader>
+        <ModalBody>
+          <p className="text-secondary">This is the main content of the modal.</p>
+        </ModalBody>
+        <ModalFooter>
+          <ModalClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </ModalClose>
+          <Button variant="primary">Confirm</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  ),
 };
 
-export const Default: Story = {
+export const SimpleDialog: Story = {
   render: () => (
-    <ModalWrapper title="Modal Title" description="This is a description of the modal content.">
-      <ModalHeader>
-        <ModalTitle>Modal Title</ModalTitle>
-        <ModalDescription>This is a description of the modal content.</ModalDescription>
-      </ModalHeader>
+    <ModalDialog
+      trigger={<Button>Simple Dialog</Button>}
+      title="Simple Dialog"
+      description="This uses the convenient ModalDialog wrapper."
+    >
       <ModalBody>
-        <p className="text-secondary">This is the main content of the modal.</p>
+        <p className="text-secondary">Content goes here.</p>
       </ModalBody>
       <ModalFooter>
-        <Button variant="outline" onClick={() => {}}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={() => {}}>
-          Confirm
-        </Button>
+        <ModalClose asChild>
+          <Button variant="outline">Close</Button>
+        </ModalClose>
+        <Button variant="primary">Save</Button>
       </ModalFooter>
-    </ModalWrapper>
+    </ModalDialog>
   ),
 };
 
@@ -78,23 +78,26 @@ export const Sizes: Story = {
     return (
       <div className="flex flex-wrap gap-2">
         {sizes.map((size) => (
-          <ModalWrapper key={size} size={size} buttonText={`Open ${size} Modal`}>
-            <ModalHeader>
-              <ModalTitle>{size.toUpperCase()} Modal</ModalTitle>
-              <ModalDescription>Size: {size}</ModalDescription>
-            </ModalHeader>
-            <ModalBody>
-              <p className="text-secondary">Content for {size} modal.</p>
-            </ModalBody>
-            <ModalFooter>
-              <Button variant="outline" onClick={() => {}}>
-                Cancel
-              </Button>
-              <Button variant="primary" onClick={() => {}}>
-                OK
-              </Button>
-            </ModalFooter>
-          </ModalWrapper>
+          <Modal key={size}>
+            <ModalTrigger asChild>
+              <Button variant="outline">Open {size} Modal</Button>
+            </ModalTrigger>
+            <ModalContent size={size}>
+              <ModalHeader>
+                <ModalTitle>{size.toUpperCase()} Modal</ModalTitle>
+                <ModalDescription>Size: {size}</ModalDescription>
+              </ModalHeader>
+              <ModalBody>
+                <p className="text-secondary">Content for {size} modal.</p>
+              </ModalBody>
+              <ModalFooter>
+                <ModalClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </ModalClose>
+                <Button variant="primary">OK</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         ))}
       </div>
     );
@@ -103,11 +106,11 @@ export const Sizes: Story = {
 
 export const WithForm: Story = {
   render: () => (
-    <ModalWrapper title="Create Playlist" description="Enter details for your new playlist.">
-      <ModalHeader>
-        <ModalTitle>Create Playlist</ModalTitle>
-        <ModalDescription>Enter details for your new playlist.</ModalDescription>
-      </ModalHeader>
+    <ModalDialog
+      trigger={<Button>Create Playlist</Button>}
+      title="Create Playlist"
+      description="Enter details for your new playlist."
+    >
       <ModalBody>
         <form className="space-y-4">
           <div>
@@ -135,118 +138,154 @@ export const WithForm: Story = {
         </form>
       </ModalBody>
       <ModalFooter>
-        <Button variant="outline" onClick={() => {}}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={() => {}}>
-          Create
-        </Button>
+        <ModalClose asChild>
+          <Button variant="outline">Cancel</Button>
+        </ModalClose>
+        <Button variant="primary">Create</Button>
       </ModalFooter>
-    </ModalWrapper>
+    </ModalDialog>
   ),
 };
 
 export const Confirmation: Story = {
   render: () => (
-    <ModalWrapper
+    <ModalDialog
+      trigger={<Button variant="outline">Delete Playlist</Button>}
       title="Delete Playlist"
       description="Are you sure you want to delete this playlist?"
     >
-      <ModalHeader>
-        <ModalTitle>Delete Playlist</ModalTitle>
-        <ModalDescription>Are you sure you want to delete this playlist?</ModalDescription>
-      </ModalHeader>
       <ModalBody>
         <p className="text-secondary">This action cannot be undone.</p>
       </ModalBody>
       <ModalFooter>
-        <Button variant="outline" onClick={() => {}}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={() => {}} className="bg-red-600 hover:bg-red-700">
+        <ModalClose asChild>
+          <Button variant="outline">Cancel</Button>
+        </ModalClose>
+        <Button variant="primary" className="bg-red-600 hover:bg-red-700">
           Delete
         </Button>
       </ModalFooter>
-    </ModalWrapper>
+    </ModalDialog>
   ),
 };
 
 export const QuickView: Story = {
   render: () => (
-    <ModalWrapper size="lg" buttonText="Quick View">
-      <ModalBody className="p-0">
-        <img
-          src="https://placehold.co/600x400/344b33/white?text=Product+Image"
-          alt="Product"
-          className="w-full h-64 object-cover rounded-t-lg"
-        />
-        <div className="p-6">
-          <ModalTitle>Product Name</ModalTitle>
-          <ModalDescription>SKU: 12345-678</ModalDescription>
-          <div className="mt-4 space-y-2">
-            <p className="text-primary font-semibold text-lg">$99.99</p>
-            <p className="text-secondary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-              incididunt.
-            </p>
+    <Modal>
+      <ModalTrigger asChild>
+        <Button>Quick View</Button>
+      </ModalTrigger>
+      <ModalContent size="lg" className="p-0">
+        <ModalBody className="p-0">
+          <img
+            src="https://placehold.co/600x400/344b33/white?text=Product+Image"
+            alt="Product"
+            className="w-full h-64 object-cover rounded-t-lg"
+          />
+          <div className="p-6">
+            <ModalTitle>Product Name</ModalTitle>
+            <ModalDescription>SKU: 12345-678</ModalDescription>
+            <div className="mt-4 space-y-2">
+              <p className="text-primary font-semibold text-lg">$99.99</p>
+              <p className="text-secondary">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt.
+              </p>
+            </div>
           </div>
-        </div>
-      </ModalBody>
-      <ModalFooter>
-        <Button variant="outline" onClick={() => {}}>
-          Add to Cart
-        </Button>
-        <Button variant="primary" onClick={() => {}}>
-          Buy Now
-        </Button>
-      </ModalFooter>
-    </ModalWrapper>
+        </ModalBody>
+        <ModalFooter>
+          <ModalClose asChild>
+            <Button variant="outline">Add to Cart</Button>
+          </ModalClose>
+          <Button variant="primary">Buy Now</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   ),
 };
 
-export const SimpleContent: Story = {
-  render: () => (
-    <ModalWrapper showCloseButton={false}>
-      <ModalBody>
-        <p className="text-primary">Simple modal with just content and no header/footer.</p>
-        <Button onClick={() => {}} className="mt-4 w-full">
-          Close
-        </Button>
-      </ModalBody>
-    </ModalWrapper>
-  ),
+export const ControlledModal: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Controlled Modal</Button>
+        <Modal open={open} onOpenChange={setOpen}>
+          <ModalContent>
+            <ModalHeader>
+              <ModalTitle>Controlled Modal</ModalTitle>
+              <ModalDescription>This modal is controlled by React state.</ModalDescription>
+            </ModalHeader>
+            <ModalBody>
+              <p className="text-secondary">The parent component controls the open state.</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button variant="outline" onClick={() => setOpen(false)}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  },
 };
 
-export const AllFeatures: Story = {
+export const WithoutCloseButton: Story = {
   render: () => (
-    <ModalWrapper
-      size="lg"
-      title="Feature Rich Modal"
-      description="This modal demonstrates all features working together."
+    <ModalDialog
+      trigger={<Button>No Close Button</Button>}
+      title="Custom Close"
+      description="This modal doesn't have the default X button."
+      showCloseButton={false}
     >
-      <ModalHeader>
-        <ModalTitle>Feature Rich Modal</ModalTitle>
-        <ModalDescription>This modal demonstrates all features working together.</ModalDescription>
-      </ModalHeader>
       <ModalBody>
-        <ul className="space-y-2 text-secondary">
-          <li>✓ ESC key to close</li>
-          <li>✓ Click overlay to close</li>
-          <li>✓ Focus trap within modal</li>
-          <li>✓ Return focus on close</li>
-          <li>✓ ARIA attributes for accessibility</li>
-          <li>✓ Responsive sizing</li>
-          <li>✓ Smooth animations</li>
-        </ul>
+        <p className="text-secondary">You can only close this with the footer buttons.</p>
       </ModalBody>
       <ModalFooter>
-        <Button variant="outline" onClick={() => {}}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={() => {}}>
-          Got it
-        </Button>
+        <ModalClose asChild>
+          <Button variant="primary">Got it</Button>
+        </ModalClose>
       </ModalFooter>
-    </ModalWrapper>
+    </ModalDialog>
+  ),
+};
+
+export const NestedModals: Story = {
+  render: () => (
+    <Modal>
+      <ModalTrigger asChild>
+        <Button>Open First Modal</Button>
+      </ModalTrigger>
+      <ModalContent>
+        <ModalHeader>
+          <ModalTitle>First Modal</ModalTitle>
+          <ModalDescription>Open another modal from here.</ModalDescription>
+        </ModalHeader>
+        <ModalBody>
+          <Modal>
+            <ModalTrigger asChild>
+              <Button variant="outline">Open Second Modal</Button>
+            </ModalTrigger>
+            <ModalContent>
+              <ModalHeader>
+                <ModalTitle>Second Modal</ModalTitle>
+                <ModalDescription>This is a nested modal.</ModalDescription>
+              </ModalHeader>
+              <ModalBody>
+                <p className="text-secondary">Nested modals work perfectly!</p>
+              </ModalBody>
+              <ModalFooter>
+                <ModalClose asChild>
+                  <Button variant="primary">Close</Button>
+                </ModalClose>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   ),
 };

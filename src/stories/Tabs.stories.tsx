@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../Tabs';
+import { Button } from '../Button';
+import { Card, CardContent, CardTitle, CardDescription } from '../Card';
 import {
   Grid,
   List,
@@ -14,9 +17,6 @@ import {
   CreditCard,
   CheckCircle,
 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../Tabs';
-import { Button } from '../Button';
-import { Card, CardContent, CardTitle, CardDescription } from '../Card';
 import '../../dist/index.css';
 
 const meta: Meta<typeof Tabs> = {
@@ -25,34 +25,27 @@ const meta: Meta<typeof Tabs> = {
   parameters: {
     layout: 'centered',
   },
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['underline', 'pills', 'enclosed'],
-    },
-    fullWidth: {
-      control: 'boolean',
-    },
-  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Tabs>;
 
 export const Underline: Story = {
-  args: {
-    variant: 'underline',
-    defaultValue: 'songs',
-    children: (
-      <>
-        <TabsList>
-          <TabsTrigger value="songs" icon={<Music className="w-4 h-4" />}>
+  render: () => (
+    <div className="w-[400px]">
+      <Tabs defaultValue="songs">
+        <TabsList variant="underline">
+          <TabsTrigger variant="underline" value="songs" icon={<Music className="w-4 h-4" />}>
             All Songs
           </TabsTrigger>
-          <TabsTrigger value="playlists" icon={<PlaySquare className="w-4 h-4" />}>
+          <TabsTrigger
+            variant="underline"
+            value="playlists"
+            icon={<PlaySquare className="w-4 h-4" />}
+          >
             Playlists
           </TabsTrigger>
-          <TabsTrigger value="queue" icon={<ListMusic className="w-4 h-4" />}>
+          <TabsTrigger variant="underline" value="queue" icon={<ListMusic className="w-4 h-4" />}>
             Queue
           </TabsTrigger>
         </TabsList>
@@ -65,25 +58,23 @@ export const Underline: Story = {
         <TabsContent value="queue">
           <p className="text-secondary">Your current queue will appear here.</p>
         </TabsContent>
-      </>
-    ),
-  },
+      </Tabs>
+    </div>
+  ),
 };
 
 export const Pills: Story = {
-  args: {
-    variant: 'pills',
-    defaultValue: 'following',
-    children: (
-      <>
-        <TabsList>
-          <TabsTrigger value="following" icon={<Users className="w-4 h-4" />}>
+  render: () => (
+    <div className="w-[400px]">
+      <Tabs defaultValue="following">
+        <TabsList variant="pills">
+          <TabsTrigger variant="pills" value="following" icon={<Users className="w-4 h-4" />}>
             Following
           </TabsTrigger>
-          <TabsTrigger value="trending" icon={<TrendingUp className="w-4 h-4" />}>
+          <TabsTrigger variant="pills" value="trending" icon={<TrendingUp className="w-4 h-4" />}>
             Trending
           </TabsTrigger>
-          <TabsTrigger value="latest" icon={<Clock className="w-4 h-4" />}>
+          <TabsTrigger variant="pills" value="latest" icon={<Clock className="w-4 h-4" />}>
             Latest
           </TabsTrigger>
         </TabsList>
@@ -96,28 +87,30 @@ export const Pills: Story = {
         <TabsContent value="latest">
           <p className="text-secondary">Most recent posts.</p>
         </TabsContent>
-      </>
-    ),
-  },
+      </Tabs>
+    </div>
+  ),
 };
 
 export const Enclosed: Story = {
-  args: {
-    variant: 'enclosed',
-    defaultValue: 'search',
-    children: (
-      <>
-        <TabsList>
-          <TabsTrigger value="search" icon={<Search className="w-4 h-4" />}>
+  render: () => (
+    <div className="w-[500px]">
+      <Tabs defaultValue="search">
+        <TabsList variant="enclosed">
+          <TabsTrigger variant="enclosed" value="search" icon={<Search className="w-4 h-4" />}>
             Search
           </TabsTrigger>
-          <TabsTrigger value="select" icon={<MapPin className="w-4 h-4" />}>
+          <TabsTrigger variant="enclosed" value="select" icon={<MapPin className="w-4 h-4" />}>
             Select
           </TabsTrigger>
-          <TabsTrigger value="payment" icon={<CreditCard className="w-4 h-4" />}>
+          <TabsTrigger variant="enclosed" value="payment" icon={<CreditCard className="w-4 h-4" />}>
             Payment
           </TabsTrigger>
-          <TabsTrigger value="confirm" icon={<CheckCircle className="w-4 h-4" />}>
+          <TabsTrigger
+            variant="enclosed"
+            value="confirm"
+            icon={<CheckCircle className="w-4 h-4" />}
+          >
             Confirm
           </TabsTrigger>
         </TabsList>
@@ -141,19 +134,19 @@ export const Enclosed: Story = {
             <p className="text-secondary">Review and confirm booking.</p>
           </div>
         </TabsContent>
-      </>
-    ),
-  },
+      </Tabs>
+    </div>
+  ),
 };
 
 export const WithIcons: Story = {
   render: () => (
-    <Tabs defaultValue="grid" variant="pills">
-      <TabsList>
-        <TabsTrigger value="grid" icon={<Grid className="w-4 h-4" />}>
+    <Tabs defaultValue="grid">
+      <TabsList variant="pills">
+        <TabsTrigger variant="pills" value="grid" icon={<Grid className="w-4 h-4" />}>
           Grid
         </TabsTrigger>
-        <TabsTrigger value="list" icon={<List className="w-4 h-4" />}>
+        <TabsTrigger variant="pills" value="list" icon={<List className="w-4 h-4" />}>
           List
         </TabsTrigger>
       </TabsList>
@@ -163,38 +156,69 @@ export const WithIcons: Story = {
 
 export const WithBadges: Story = {
   render: () => (
-    <Tabs defaultValue="all" variant="underline">
-      <TabsList>
-        <TabsTrigger value="all" badge={24}>
-          All
-        </TabsTrigger>
-        <TabsTrigger value="unread" badge={5}>
-          Unread
-        </TabsTrigger>
-        <TabsTrigger value="archived" badge={12}>
-          Archived
-        </TabsTrigger>
-      </TabsList>
-    </Tabs>
+    <div className="w-[400px]">
+      <Tabs defaultValue="all">
+        <TabsList variant="underline">
+          <TabsTrigger variant="underline" value="all" badge={24}>
+            All
+          </TabsTrigger>
+          <TabsTrigger variant="underline" value="unread" badge={5}>
+            Unread
+          </TabsTrigger>
+          <TabsTrigger variant="underline" value="archived" badge={12}>
+            Archived
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+    </div>
   ),
 };
 
 export const FullWidth: Story = {
-  args: {
-    variant: 'underline',
-    fullWidth: true,
-    defaultValue: '1d',
-    children: (
-      <TabsList>
-        <TabsTrigger value="1d">1D</TabsTrigger>
-        <TabsTrigger value="1w">1W</TabsTrigger>
-        <TabsTrigger value="1m">1M</TabsTrigger>
-        <TabsTrigger value="3m">3M</TabsTrigger>
-        <TabsTrigger value="1y">1Y</TabsTrigger>
-        <TabsTrigger value="all">ALL</TabsTrigger>
-      </TabsList>
-    ),
-  },
+  render: () => (
+    <div className="w-[600px]">
+      <Tabs defaultValue="1d">
+        <TabsList variant="underline" fullWidth>
+          <TabsTrigger variant="underline" value="1d">
+            1D
+          </TabsTrigger>
+          <TabsTrigger variant="underline" value="1w">
+            1W
+          </TabsTrigger>
+          <TabsTrigger variant="underline" value="1m">
+            1M
+          </TabsTrigger>
+          <TabsTrigger variant="underline" value="3m">
+            3M
+          </TabsTrigger>
+          <TabsTrigger variant="underline" value="1y">
+            1Y
+          </TabsTrigger>
+          <TabsTrigger variant="underline" value="all">
+            ALL
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="1d">
+          <p className="text-secondary">1 Day chart data</p>
+        </TabsContent>
+        <TabsContent value="1w">
+          <p className="text-secondary">1 Week chart data</p>
+        </TabsContent>
+        <TabsContent value="1m">
+          <p className="text-secondary">1 Month chart data</p>
+        </TabsContent>
+        <TabsContent value="3m">
+          <p className="text-secondary">3 Months chart data</p>
+        </TabsContent>
+        <TabsContent value="1y">
+          <p className="text-secondary">1 Year chart data</p>
+        </TabsContent>
+        <TabsContent value="all">
+          <p className="text-secondary">All time chart data</p>
+        </TabsContent>
+      </Tabs>
+    </div>
+  ),
 };
 
 export const Controlled: Story = {
@@ -202,7 +226,7 @@ export const Controlled: Story = {
     const [activeTab, setActiveTab] = useState('songs');
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 w-[400px]">
         <div className="flex gap-2">
           <Button size="sm" onClick={() => setActiveTab('songs')}>
             Songs Tab
@@ -214,11 +238,17 @@ export const Controlled: Story = {
             Queue Tab
           </Button>
         </div>
-        <Tabs value={activeTab} onValueChange={setActiveTab} variant="underline">
-          <TabsList>
-            <TabsTrigger value="songs">All Songs</TabsTrigger>
-            <TabsTrigger value="playlists">Playlists</TabsTrigger>
-            <TabsTrigger value="queue">Queue</TabsTrigger>
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList variant="underline">
+            <TabsTrigger variant="underline" value="songs">
+              All Songs
+            </TabsTrigger>
+            <TabsTrigger variant="underline" value="playlists">
+              Playlists
+            </TabsTrigger>
+            <TabsTrigger variant="underline" value="queue">
+              Queue
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="songs">
             <Card>
@@ -252,36 +282,54 @@ export const Controlled: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="space-y-8">
+    <div className="space-y-8 w-[500px]">
       <div>
         <h3 className="text-lg font-semibold text-primary mb-2">Underline</h3>
-        <Tabs defaultValue="tab1" variant="underline">
-          <TabsList>
-            <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-            <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-            <TabsTrigger value="tab3">Tab 3</TabsTrigger>
+        <Tabs defaultValue="tab1">
+          <TabsList variant="underline">
+            <TabsTrigger variant="underline" value="tab1">
+              Tab 1
+            </TabsTrigger>
+            <TabsTrigger variant="underline" value="tab2">
+              Tab 2
+            </TabsTrigger>
+            <TabsTrigger variant="underline" value="tab3">
+              Tab 3
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
 
       <div>
         <h3 className="text-lg font-semibold text-primary mb-2">Pills</h3>
-        <Tabs defaultValue="tab1" variant="pills">
-          <TabsList>
-            <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-            <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-            <TabsTrigger value="tab3">Tab 3</TabsTrigger>
+        <Tabs defaultValue="tab1">
+          <TabsList variant="pills">
+            <TabsTrigger variant="pills" value="tab1">
+              Tab 1
+            </TabsTrigger>
+            <TabsTrigger variant="pills" value="tab2">
+              Tab 2
+            </TabsTrigger>
+            <TabsTrigger variant="pills" value="tab3">
+              Tab 3
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
 
       <div>
         <h3 className="text-lg font-semibold text-primary mb-2">Enclosed</h3>
-        <Tabs defaultValue="tab1" variant="enclosed">
-          <TabsList>
-            <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-            <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-            <TabsTrigger value="tab3">Tab 3</TabsTrigger>
+        <Tabs defaultValue="tab1">
+          <TabsList variant="enclosed">
+            <TabsTrigger variant="enclosed" value="tab1">
+              Tab 1
+            </TabsTrigger>
+            <TabsTrigger variant="enclosed" value="tab2">
+              Tab 2
+            </TabsTrigger>
+            <TabsTrigger variant="enclosed" value="tab3">
+              Tab 3
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
