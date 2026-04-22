@@ -166,4 +166,27 @@ declare const DropdownMenuSubTrigger: React.ForwardRefExoticComponent<Omit<Dropd
 } & React.RefAttributes<HTMLDivElement>>;
 declare const DropdownMenuSubContent: React.ForwardRefExoticComponent<Omit<DropdownMenuPrimitive.DropdownMenuSubContentProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, SearchBar, type SearchBarProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, cn };
+type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info';
+interface ToastOptions {
+    id?: string;
+    title?: string;
+    description?: string;
+    variant?: ToastVariant;
+    duration?: number;
+    action?: {
+        label: string;
+        onClick: () => void;
+    };
+}
+interface ToastContextValue {
+    toast: (options: ToastOptions) => void;
+    dismiss: (id: string) => void;
+    dismissAll: () => void;
+}
+declare const useToast: () => ToastContextValue;
+interface ToastProviderProps {
+    children: React.ReactNode;
+}
+declare const ToastProvider: React.FC<ToastProviderProps>;
+
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, SearchBar, type SearchBarProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, ToastProvider, type ToastVariant, cn, useToast };
