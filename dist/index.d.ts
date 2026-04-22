@@ -189,4 +189,63 @@ interface ToastProviderProps {
 }
 declare const ToastProvider: React.FC<ToastProviderProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, SearchBar, type SearchBarProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, ToastProvider, type ToastVariant, cn, useToast };
+declare const skeleton: (props?: ({
+    variant?: "text" | "rounded" | "circular" | "rectangular" | null | undefined;
+    animation?: "none" | "pulse" | "wave" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof skeleton> {
+    width?: string | number;
+    height?: string | number;
+}
+declare const Skeleton: React.FC<SkeletonProps>;
+interface SkeletonTextProps {
+    lines?: number;
+    spacing?: 'sm' | 'md' | 'lg';
+    className?: string;
+    lastLineWidth?: string | number;
+}
+declare const SkeletonText: React.FC<SkeletonTextProps>;
+interface SkeletonAvatarProps {
+    size?: 'sm' | 'md' | 'lg' | 'xl';
+    className?: string;
+}
+declare const SkeletonAvatar: React.FC<SkeletonAvatarProps>;
+interface SkeletonCardProps {
+    hasImage?: boolean;
+    hasFooter?: boolean;
+    className?: string;
+}
+declare const SkeletonCard: React.FC<SkeletonCardProps>;
+interface SkeletonTableProps {
+    rows?: number;
+    columns?: number;
+    hasHeader?: boolean;
+    className?: string;
+}
+declare const SkeletonTable: React.FC<SkeletonTableProps>;
+interface SkeletonListProps {
+    items?: number;
+    hasAvatar?: boolean;
+    hasThumbnail?: boolean;
+    className?: string;
+}
+declare const SkeletonList: React.FC<SkeletonListProps>;
+interface SkeletonGridProps {
+    items?: number;
+    columns?: 2 | 3 | 4 | 5 | 6;
+    hasImage?: boolean;
+    className?: string;
+}
+declare const SkeletonGrid: React.FC<SkeletonGridProps>;
+interface SkeletonChartProps {
+    type?: 'line' | 'bar' | 'area';
+    className?: string;
+}
+declare const SkeletonChart: React.FC<SkeletonChartProps>;
+interface SkeletonFormProps {
+    fields?: number;
+    className?: string;
+}
+declare const SkeletonForm: React.FC<SkeletonFormProps>;
+
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, SearchBar, type SearchBarProps, Skeleton, SkeletonAvatar, type SkeletonAvatarProps, SkeletonCard, type SkeletonCardProps, SkeletonChart, type SkeletonChartProps, SkeletonForm, type SkeletonFormProps, SkeletonGrid, type SkeletonGridProps, SkeletonList, type SkeletonListProps, type SkeletonProps, SkeletonTable, type SkeletonTableProps, SkeletonText, type SkeletonTextProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, ToastProvider, type ToastVariant, cn, useToast };
