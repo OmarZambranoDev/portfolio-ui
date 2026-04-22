@@ -2,6 +2,7 @@
 
 import React from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { ChevronRight } from 'lucide-react';
 import { cn } from './lib/utils';
 
 // Root Component
@@ -150,15 +151,7 @@ export const DropdownMenuSubTrigger = React.forwardRef<
   >
     {icon && <span className="mr-2 h-4 w-4 text-muted">{icon}</span>}
     {children}
-    <svg
-      className="ml-auto h-4 w-4 text-muted"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
+    <ChevronRight className="ml-auto h-4 w-4 text-muted" />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 

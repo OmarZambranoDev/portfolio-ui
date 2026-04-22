@@ -27,7 +27,7 @@ const skeleton = cva('block bg-gray-200', {
 
 export interface SkeletonProps
   extends React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof skeleton> {
+    VariantProps<typeof skeleton> {
   width?: string | number;
   height?: string | number;
 }
@@ -44,7 +44,8 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   const inlineStyle: React.CSSProperties = {
     ...style,
     width: width !== undefined ? (typeof width === 'number' ? `${width}px` : width) : undefined,
-    height: height !== undefined ? (typeof height === 'number' ? `${height}px` : height) : undefined,
+    height:
+      height !== undefined ? (typeof height === 'number' ? `${height}px` : height) : undefined,
   };
 
   return (
@@ -98,10 +99,7 @@ export interface SkeletonAvatarProps {
   className?: string;
 }
 
-export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({
-  size = 'md',
-  className,
-}) => {
+export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({ size = 'md', className }) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-10 h-10',
@@ -109,12 +107,7 @@ export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({
     xl: 'w-16 h-16',
   };
 
-  return (
-    <Skeleton
-      variant="circular"
-      className={cn(sizeClasses[size], className)}
-    />
-  );
+  return <Skeleton variant="circular" className={cn(sizeClasses[size], className)} />;
 };
 
 // Card Skeleton - For product/track cards
@@ -259,10 +252,7 @@ export interface SkeletonChartProps {
   className?: string;
 }
 
-export const SkeletonChart: React.FC<SkeletonChartProps> = ({
-  type = 'line',
-  className,
-}) => {
+export const SkeletonChart: React.FC<SkeletonChartProps> = ({ type = 'line', className }) => {
   return (
     <div className={cn('w-full h-64 bg-gray-100 rounded-lg p-4', className)}>
       <div className="flex items-center justify-between mb-4">
@@ -280,10 +270,7 @@ export interface SkeletonFormProps {
   className?: string;
 }
 
-export const SkeletonForm: React.FC<SkeletonFormProps> = ({
-  fields = 4,
-  className,
-}) => {
+export const SkeletonForm: React.FC<SkeletonFormProps> = ({ fields = 4, className }) => {
   return (
     <div className={cn('space-y-4', className)}>
       {Array.from({ length: fields }).map((_, index) => (

@@ -62,11 +62,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   }, []);
 
   const dismiss = useCallback((id: string) => {
-    setToasts((prev) =>
-      prev.map((toast) =>
-        toast.id === id ? { ...toast, open: false } : toast
-      )
-    );
+    setToasts((prev) => prev.map((toast) => (toast.id === id ? { ...toast, open: false } : toast)));
   }, []);
 
   const dismissAll = useCallback(() => {
@@ -95,19 +91,21 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     <ToastContext.Provider value={value}>
       {children}
       <ToastPrimitive.Provider swipeDirection="right">
-        {toasts.map(({ id, title, description, variant = 'default', duration = 5000, action, open }) => (
-          <Toast
-            key={id}
-            id={id}
-            title={title}
-            description={description}
-            variant={variant}
-            duration={duration}
-            action={action}
-            open={open}
-            onOpenChange={(open) => handleOpenChange(id, open)}
-          />
-        ))}
+        {toasts.map(
+          ({ id, title, description, variant = 'default', duration = 5000, action, open }) => (
+            <Toast
+              key={id}
+              id={id}
+              title={title}
+              description={description}
+              variant={variant}
+              duration={duration}
+              action={action}
+              open={open}
+              onOpenChange={(open) => handleOpenChange(id, open)}
+            />
+          )
+        )}
         <ToastPrimitive.Viewport className="fixed bottom-0 right-0 z-50 m-0 flex w-full max-w-sm flex-col gap-2 p-4 outline-none md:m-4" />
       </ToastPrimitive.Provider>
     </ToastContext.Provider>
@@ -191,9 +189,7 @@ const Toast: React.FC<ToastProps> = ({
         config.container
       )}
     >
-      {IconComponent && (
-        <IconComponent className={cn('h-5 w-5 shrink-0', config.iconColor)} />
-      )}
+      {IconComponent && <IconComponent className={cn('h-5 w-5 shrink-0', config.iconColor)} />}
 
       <div className="flex-1 min-w-0">
         {title && (
@@ -208,12 +204,7 @@ const Toast: React.FC<ToastProps> = ({
         )}
         {action && (
           <ToastPrimitive.Action asChild altText={action.label}>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={action.onClick}
-              className="mt-2"
-            >
+            <Button variant="outline" size="sm" onClick={action.onClick} className="mt-2">
               {action.label}
             </Button>
           </ToastPrimitive.Action>
