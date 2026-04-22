@@ -12,7 +12,7 @@ import {
   AlertCircle,
   Clock,
   FolderOpen,
-  type LucideIcon
+  type LucideIcon,
 } from 'lucide-react';
 import { cn } from './lib/utils';
 import { Button } from './Button';
@@ -143,7 +143,11 @@ export interface SimpleEmptyStateProps {
 }
 
 // No Search Results
-export const NoSearchResults: React.FC<SimpleEmptyStateProps> = ({ size = 'md', className, action }) => (
+export const NoSearchResults: React.FC<SimpleEmptyStateProps> = ({
+  size = 'md',
+  className,
+  action,
+}) => (
   <EmptyState
     title="No results found"
     description="Try adjusting your search or filter to find what you're looking for."
@@ -159,7 +163,12 @@ export interface NoItemsProps extends SimpleEmptyStateProps {
   itemType?: string;
 }
 
-export const NoItems: React.FC<NoItemsProps> = ({ itemType = 'items', size = 'md', className, action }) => (
+export const NoItems: React.FC<NoItemsProps> = ({
+  itemType = 'items',
+  size = 'md',
+  className,
+  action,
+}) => (
   <EmptyState
     title={`No ${itemType} yet`}
     description={`Get started by creating your first ${itemType.slice(0, -1)}.`}
@@ -178,12 +187,16 @@ export const EmptyCart: React.FC<SimpleEmptyStateProps> = ({ size = 'md', classN
     icon={ShoppingCart}
     size={size}
     className={className}
-    action={action || { label: 'Start Shopping', onClick: () => { } }}
+    action={action || { label: 'Start Shopping', onClick: () => {} }}
   />
 );
 
 // No Notifications
-export const NoNotifications: React.FC<SimpleEmptyStateProps> = ({ size = 'md', className, action }) => (
+export const NoNotifications: React.FC<SimpleEmptyStateProps> = ({
+  size = 'md',
+  className,
+  action,
+}) => (
   <EmptyState
     title="No notifications"
     description="You're all caught up! Check back later for updates."
@@ -228,7 +241,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   error = 'Something went wrong',
   onRetry,
   size = 'md',
-  className
+  className,
 }) => (
   <EmptyState
     title="Oops! Something went wrong"
@@ -252,7 +265,11 @@ export const ComingSoon: React.FC<SimpleEmptyStateProps> = ({ size = 'md', class
 );
 
 // Custom with folder icon
-export const NoFolderItems: React.FC<SimpleEmptyStateProps> = ({ size = 'md', className, action }) => (
+export const NoFolderItems: React.FC<SimpleEmptyStateProps> = ({
+  size = 'md',
+  className,
+  action,
+}) => (
   <EmptyState
     title="This folder is empty"
     description="Add items to this folder to get started."

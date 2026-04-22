@@ -103,19 +103,23 @@ interface ModalDialogProps {
 declare const ModalDialog: React.FC<ModalDialogProps>;
 
 declare const Tabs: React.ForwardRefExoticComponent<TabsPrimitive.TabsProps & React.RefAttributes<HTMLDivElement>>;
-interface TabsListProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> {
-    variant?: 'underline' | 'pills' | 'enclosed';
-    fullWidth?: boolean;
+declare const tabsList: (props?: ({
+    variant?: "underline" | "pills" | "enclosed" | null | undefined;
+    fullWidth?: boolean | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface TabsListProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>, VariantProps<typeof tabsList> {
 }
-interface TabsTriggerProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> {
-    variant?: 'underline' | 'pills' | 'enclosed';
+declare const TabsList: React.ForwardRefExoticComponent<TabsListProps & React.RefAttributes<HTMLDivElement>>;
+declare const tabsTrigger: (props?: ({
+    variant?: "underline" | "pills" | "enclosed" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface TabsTriggerProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>, VariantProps<typeof tabsTrigger> {
     icon?: React.ReactNode;
     badge?: number | string;
 }
+declare const TabsTrigger: React.ForwardRefExoticComponent<TabsTriggerProps & React.RefAttributes<HTMLButtonElement>>;
 interface TabsContentProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content> {
 }
-declare const TabsList: React.ForwardRefExoticComponent<TabsListProps & React.RefAttributes<HTMLDivElement>>;
-declare const TabsTrigger: React.ForwardRefExoticComponent<TabsTriggerProps & React.RefAttributes<HTMLButtonElement>>;
 declare const TabsContent: React.ForwardRefExoticComponent<TabsContentProps & React.RefAttributes<HTMLDivElement>>;
 
 declare const searchBarInput: (props?: ({
@@ -141,19 +145,31 @@ declare const SearchBar: React.FC<SearchBarProps>;
 declare const DropdownMenu: React.FC<DropdownMenuPrimitive.DropdownMenuProps>;
 declare const DropdownMenuTrigger: React.ForwardRefExoticComponent<DropdownMenuPrimitive.DropdownMenuTriggerProps & React.RefAttributes<HTMLButtonElement>>;
 declare const DropdownMenuPortal: React.FC<DropdownMenuPrimitive.DropdownMenuPortalProps>;
-interface DropdownMenuContentProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content> {
+declare const dropdownContent: (props?: ({
+    animationSide?: "top" | "right" | "bottom" | "left" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface DropdownMenuContentProps extends Omit<React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>, 'side'>, VariantProps<typeof dropdownContent> {
     align?: 'start' | 'center' | 'end';
     side?: 'top' | 'right' | 'bottom' | 'left';
 }
 declare const DropdownMenuContent: React.ForwardRefExoticComponent<DropdownMenuContentProps & React.RefAttributes<HTMLDivElement>>;
-interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> {
-    destructive?: boolean;
+declare const dropdownItem: (props?: ({
+    isDestructive?: boolean | null | undefined;
+    isDisabled?: boolean | null | undefined;
+    withInset?: boolean | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface DropdownMenuItemProps extends Omit<React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item>, 'disabled'>, VariantProps<typeof dropdownItem> {
     icon?: React.ReactNode;
     shortcut?: string;
+    destructive?: boolean;
+    disabled?: boolean;
     inset?: boolean;
 }
 declare const DropdownMenuItem: React.ForwardRefExoticComponent<DropdownMenuItemProps & React.RefAttributes<HTMLDivElement>>;
-interface DropdownMenuLabelProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> {
+declare const dropdownLabel: (props?: ({
+    withInset?: boolean | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface DropdownMenuLabelProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label>, VariantProps<typeof dropdownLabel> {
     inset?: boolean;
 }
 declare const DropdownMenuLabel: React.ForwardRefExoticComponent<DropdownMenuLabelProps & React.RefAttributes<HTMLDivElement>>;
@@ -161,11 +177,17 @@ interface DropdownMenuSeparatorProps extends React.ComponentPropsWithoutRef<type
 }
 declare const DropdownMenuSeparator: React.ForwardRefExoticComponent<DropdownMenuSeparatorProps & React.RefAttributes<HTMLDivElement>>;
 declare const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuSubProps>;
-declare const DropdownMenuSubTrigger: React.ForwardRefExoticComponent<Omit<DropdownMenuPrimitive.DropdownMenuSubTriggerProps & React.RefAttributes<HTMLDivElement>, "ref"> & {
-    inset?: boolean | undefined;
+declare const DropdownMenuSubTrigger: React.ForwardRefExoticComponent<Omit<DropdownMenuPrimitive.DropdownMenuSubTriggerProps & React.RefAttributes<HTMLDivElement>, "ref"> & VariantProps<(props?: ({
+    withInset?: boolean | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string> & {
     icon?: React.ReactNode;
+    inset?: boolean | undefined;
 } & React.RefAttributes<HTMLDivElement>>;
-declare const DropdownMenuSubContent: React.ForwardRefExoticComponent<Omit<DropdownMenuPrimitive.DropdownMenuSubContentProps & React.RefAttributes<HTMLDivElement>, "ref"> & React.RefAttributes<HTMLDivElement>>;
+declare const DropdownMenuSubContent: React.ForwardRefExoticComponent<Omit<Omit<DropdownMenuPrimitive.DropdownMenuSubContentProps & React.RefAttributes<HTMLDivElement>, "ref">, "side"> & VariantProps<(props?: ({
+    animationSide?: "top" | "right" | "bottom" | "left" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string> & {
+    side?: "top" | "right" | "bottom" | "left" | undefined;
+} & React.RefAttributes<HTMLDivElement>>;
 
 type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info';
 interface ToastOptions {
@@ -189,6 +211,21 @@ interface ToastProviderProps {
     children: React.ReactNode;
 }
 declare const ToastProvider: React.FC<ToastProviderProps>;
+declare const toastContainer: (props?: ({
+    variant?: "default" | "error" | "success" | "warning" | "info" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface ToastProps extends VariantProps<typeof toastContainer> {
+    id: string;
+    title?: string;
+    description?: string;
+    duration?: number;
+    action?: {
+        label: string;
+        onClick: () => void;
+    };
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+}
 
 declare const skeleton: (props?: ({
     variant?: "text" | "rounded" | "circular" | "rectangular" | null | undefined;
@@ -287,4 +324,4 @@ interface ErrorStateProps extends SimpleEmptyStateProps {
 declare const ErrorState: React.FC<ErrorStateProps>;
 declare const ComingSoon: React.FC<SimpleEmptyStateProps>;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, ComingSoon, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EmptyCart, EmptyState, type EmptyStateProps, ErrorState, type ErrorStateProps, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, NoData, NoItems, type NoItemsProps, NoMessages, NoNotifications, NoSearchResults, SearchBar, type SearchBarProps, type SimpleEmptyStateProps, Skeleton, SkeletonAvatar, type SkeletonAvatarProps, SkeletonCard, type SkeletonCardProps, SkeletonChart, type SkeletonChartProps, SkeletonForm, type SkeletonFormProps, SkeletonGrid, type SkeletonGridProps, SkeletonList, type SkeletonListProps, type SkeletonProps, SkeletonTable, type SkeletonTableProps, SkeletonText, type SkeletonTextProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, ToastProvider, type ToastVariant, cn, useToast };
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, ComingSoon, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EmptyCart, EmptyState, type EmptyStateProps, ErrorState, type ErrorStateProps, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, NoData, NoItems, type NoItemsProps, NoMessages, NoNotifications, NoSearchResults, SearchBar, type SearchBarProps, type SimpleEmptyStateProps, Skeleton, SkeletonAvatar, type SkeletonAvatarProps, SkeletonCard, type SkeletonCardProps, SkeletonChart, type SkeletonChartProps, SkeletonForm, type SkeletonFormProps, SkeletonGrid, type SkeletonGridProps, SkeletonList, type SkeletonListProps, type SkeletonProps, SkeletonTable, type SkeletonTableProps, SkeletonText, type SkeletonTextProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, type ToastProps, ToastProvider, type ToastVariant, cn, useToast };

@@ -62,7 +62,13 @@ export {
   type DropdownMenuLabelProps,
   type DropdownMenuSeparatorProps,
 } from './DropdownMenu';
-export { ToastProvider, useToast, type ToastOptions, type ToastVariant } from './Toast';
+export {
+  ToastProvider,
+  useToast,
+  type ToastOptions,
+  type ToastVariant,
+  type ToastProps,
+} from './Toast';
 export {
   Skeleton,
   SkeletonText,

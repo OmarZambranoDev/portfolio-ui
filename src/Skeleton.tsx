@@ -44,7 +44,8 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   const inlineStyle: React.CSSProperties = {
     ...style,
     width: width !== undefined ? (typeof width === 'number' ? `${width}px` : width) : undefined,
-    height: height !== undefined ? (typeof height === 'number' ? `${height}px` : height) : undefined,
+    height:
+      height !== undefined ? (typeof height === 'number' ? `${height}px` : height) : undefined,
   };
 
   return (
@@ -100,10 +101,7 @@ export interface SkeletonAvatarProps {
   className?: string;
 }
 
-export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({
-  size = 'md',
-  className,
-}) => {
+export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({ size = 'md', className }) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-10 h-10',
@@ -133,7 +131,7 @@ export const SkeletonCard: React.FC<SkeletonCardProps> = ({
   className,
 }) => {
   return (
-    <div 
+    <div
       className={cn('border border-muted/30 rounded-lg overflow-hidden bg-white', className)}
       role="status"
       aria-label="Loading card"
@@ -255,7 +253,11 @@ export const SkeletonGrid: React.FC<SkeletonGridProps> = ({
   };
 
   return (
-    <div className={cn('grid gap-4', gridCols[columns], className)} role="status" aria-label="Loading grid">
+    <div
+      className={cn('grid gap-4', gridCols[columns], className)}
+      role="status"
+      aria-label="Loading grid"
+    >
       {Array.from({ length: items }).map((_, index) => (
         <SkeletonCard key={index} hasImage={hasImage} hasFooter={false} />
       ))}
@@ -270,12 +272,13 @@ export interface SkeletonChartProps {
   className?: string;
 }
 
-export const SkeletonChart: React.FC<SkeletonChartProps> = ({
-  type = 'line',
-  className,
-}) => {
+export const SkeletonChart: React.FC<SkeletonChartProps> = ({ type = 'line', className }) => {
   return (
-    <div className={cn('w-full h-64 bg-muted/10 rounded-lg p-4', className)} role="status" aria-label="Loading chart">
+    <div
+      className={cn('w-full h-64 bg-muted/10 rounded-lg p-4', className)}
+      role="status"
+      aria-label="Loading chart"
+    >
       <div className="flex items-center justify-between mb-4">
         <Skeleton variant="text" className="h-5 w-24" />
         <Skeleton variant="text" className="h-4 w-16" />
@@ -292,10 +295,7 @@ export interface SkeletonFormProps {
   className?: string;
 }
 
-export const SkeletonForm: React.FC<SkeletonFormProps> = ({
-  fields = 4,
-  className,
-}) => {
+export const SkeletonForm: React.FC<SkeletonFormProps> = ({ fields = 4, className }) => {
   return (
     <div className={cn('space-y-4', className)} role="status" aria-label="Loading form">
       {Array.from({ length: fields }).map((_, index) => (
