@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './lib/utils';
 
 // Base Skeleton
-const skeleton = cva('block bg-gray-200', {
+const skeleton = cva('block', {
   variants: {
     variant: {
       text: 'rounded',
@@ -14,9 +14,9 @@ const skeleton = cva('block bg-gray-200', {
       rounded: 'rounded-lg',
     },
     animation: {
-      pulse: 'animate-pulse',
-      wave: 'relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.5s_infinite] before:bg-gradient-to-r before:from-transparent before:via-gray-300 before:to-transparent',
-      none: '',
+      pulse: 'animate-pulse bg-muted/30',
+      wave: 'relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.5s_infinite] before:bg-gradient-to-r before:from-transparent before:via-muted/40 before:to-transparent bg-muted/20',
+      none: 'bg-muted/20',
     },
   },
   defaultVariants: {
@@ -44,14 +44,14 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   const inlineStyle: React.CSSProperties = {
     ...style,
     width: width !== undefined ? (typeof width === 'number' ? `${width}px` : width) : undefined,
-    height:
-      height !== undefined ? (typeof height === 'number' ? `${height}px` : height) : undefined,
+    height: height !== undefined ? (typeof height === 'number' ? `${height}px` : height) : undefined,
   };
 
   return (
     <div
       className={cn(skeleton({ variant, animation }), className)}
       style={inlineStyle}
+      aria-hidden="true"
       {...props}
     />
   );
@@ -78,7 +78,7 @@ export const SkeletonText: React.FC<SkeletonTextProps> = ({
   };
 
   return (
-    <div className={cn(spacingClasses[spacing], className)}>
+    <div className={cn(spacingClasses[spacing], className)} role="status" aria-label="Loading text">
       {Array.from({ length: lines }).map((_, index) => (
         <Skeleton
           key={index}
@@ -89,6 +89,7 @@ export const SkeletonText: React.FC<SkeletonTextProps> = ({
           }}
         />
       ))}
+      <span className="sr-only">Loading...</span>
     </div>
   );
 };
@@ -99,7 +100,10 @@ export interface SkeletonAvatarProps {
   className?: string;
 }
 
-export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({ size = 'md', className }) => {
+export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({
+  size = 'md',
+  className,
+}) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-10 h-10',
@@ -107,7 +111,13 @@ export const SkeletonAvatar: React.FC<SkeletonAvatarProps> = ({ size = 'md', cla
     xl: 'w-16 h-16',
   };
 
-  return <Skeleton variant="circular" className={cn(sizeClasses[size], className)} />;
+  return (
+    <Skeleton
+      variant="circular"
+      className={cn(sizeClasses[size], className)}
+      aria-label="Loading avatar"
+    />
+  );
 };
 
 // Card Skeleton - For product/track cards
@@ -123,7 +133,11 @@ export const SkeletonCard: React.FC<SkeletonCardProps> = ({
   className,
 }) => {
   return (
-    <div className={cn('border border-muted/30 rounded-lg overflow-hidden bg-white', className)}>
+    <div 
+      className={cn('border border-muted/30 rounded-lg overflow-hidden bg-white', className)}
+      role="status"
+      aria-label="Loading card"
+    >
       {hasImage && <Skeleton variant="rectangular" className="w-full h-40" />}
       <div className="p-4 space-y-3">
         <Skeleton variant="text" className="h-5 w-3/4" />
@@ -137,6 +151,7 @@ export const SkeletonCard: React.FC<SkeletonCardProps> = ({
           </div>
         )}
       </div>
+      <span className="sr-only">Loading card content...</span>
     </div>
   );
 };
@@ -156,7 +171,7 @@ export const SkeletonTable: React.FC<SkeletonTableProps> = ({
   className,
 }) => {
   return (
-    <div className={cn('w-full', className)}>
+    <div className={cn('w-full', className)} role="status" aria-label="Loading table">
       <table className="w-full border-collapse">
         {hasHeader && (
           <thead>
@@ -181,6 +196,7 @@ export const SkeletonTable: React.FC<SkeletonTableProps> = ({
           ))}
         </tbody>
       </table>
+      <span className="sr-only">Loading table data...</span>
     </div>
   );
 };
@@ -200,7 +216,7 @@ export const SkeletonList: React.FC<SkeletonListProps> = ({
   className,
 }) => {
   return (
-    <div className={cn('space-y-3', className)}>
+    <div className={cn('space-y-3', className)} role="status" aria-label="Loading list">
       {Array.from({ length: items }).map((_, index) => (
         <div key={index} className="flex items-center gap-3 p-2">
           {hasAvatar && <SkeletonAvatar size="md" />}
@@ -211,6 +227,7 @@ export const SkeletonList: React.FC<SkeletonListProps> = ({
           </div>
         </div>
       ))}
+      <span className="sr-only">Loading list items...</span>
     </div>
   );
 };
@@ -238,10 +255,11 @@ export const SkeletonGrid: React.FC<SkeletonGridProps> = ({
   };
 
   return (
-    <div className={cn('grid gap-4', gridCols[columns], className)}>
+    <div className={cn('grid gap-4', gridCols[columns], className)} role="status" aria-label="Loading grid">
       {Array.from({ length: items }).map((_, index) => (
         <SkeletonCard key={index} hasImage={hasImage} hasFooter={false} />
       ))}
+      <span className="sr-only">Loading grid items...</span>
     </div>
   );
 };
@@ -252,14 +270,18 @@ export interface SkeletonChartProps {
   className?: string;
 }
 
-export const SkeletonChart: React.FC<SkeletonChartProps> = ({ type = 'line', className }) => {
+export const SkeletonChart: React.FC<SkeletonChartProps> = ({
+  type = 'line',
+  className,
+}) => {
   return (
-    <div className={cn('w-full h-64 bg-gray-100 rounded-lg p-4', className)}>
+    <div className={cn('w-full h-64 bg-muted/10 rounded-lg p-4', className)} role="status" aria-label="Loading chart">
       <div className="flex items-center justify-between mb-4">
         <Skeleton variant="text" className="h-5 w-24" />
         <Skeleton variant="text" className="h-4 w-16" />
       </div>
       <Skeleton variant="rectangular" className="w-full h-48" />
+      <span className="sr-only">Loading chart data...</span>
     </div>
   );
 };
@@ -270,9 +292,12 @@ export interface SkeletonFormProps {
   className?: string;
 }
 
-export const SkeletonForm: React.FC<SkeletonFormProps> = ({ fields = 4, className }) => {
+export const SkeletonForm: React.FC<SkeletonFormProps> = ({
+  fields = 4,
+  className,
+}) => {
   return (
-    <div className={cn('space-y-4', className)}>
+    <div className={cn('space-y-4', className)} role="status" aria-label="Loading form">
       {Array.from({ length: fields }).map((_, index) => (
         <div key={index} className="space-y-2">
           <Skeleton variant="text" className="h-4 w-24" />
@@ -280,6 +305,7 @@ export const SkeletonForm: React.FC<SkeletonFormProps> = ({ fields = 4, classNam
         </div>
       ))}
       <Skeleton variant="rounded" className="h-10 w-32 mt-6" />
+      <span className="sr-only">Loading form fields...</span>
     </div>
   );
 };

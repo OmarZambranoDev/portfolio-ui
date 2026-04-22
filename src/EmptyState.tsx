@@ -12,7 +12,7 @@ import {
   AlertCircle,
   Clock,
   FolderOpen,
-  type LucideIcon,
+  type LucideIcon
 } from 'lucide-react';
 import { cn } from './lib/utils';
 import { Button } from './Button';
@@ -43,7 +43,7 @@ const iconWrapper = cva('text-muted/60', {
   },
 });
 
-const titleStyles = cva('font-medium text-gray-900', {
+const titleStyles = cva('font-medium', {
   variants: {
     size: {
       sm: 'text-base',
@@ -56,7 +56,7 @@ const titleStyles = cva('font-medium text-gray-900', {
   },
 });
 
-const descriptionStyles = cva('text-gray-500', {
+const descriptionStyles = cva('', {
   variants: {
     size: {
       sm: 'text-xs',
@@ -100,16 +100,22 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   const iconSize = iconSizes[size as 'sm' | 'md' | 'lg'];
 
   return (
-    <div className={cn(emptyState({ size }), className)}>
+    <div
+      className={cn(emptyState({ size }), className)}
+      role="status"
+      aria-label={`${title}${description ? ` - ${description}` : ''}`}
+    >
       {Icon && (
         <div className={cn(iconWrapper({ size }))}>
-          <Icon size={iconSize} className="text-muted/60" />
+          <Icon size={iconSize} className="text-muted/60" aria-hidden="true" />
         </div>
       )}
 
-      <h3 className={cn(titleStyles({ size }))}>{title}</h3>
+      <h3 className={cn(titleStyles({ size }), 'text-primary')}>{title}</h3>
 
-      {description && <p className={cn(descriptionStyles({ size }), 'max-w-sm')}>{description}</p>}
+      {description && (
+        <p className={cn(descriptionStyles({ size }), 'text-secondary max-w-sm')}>{description}</p>
+      )}
 
       {action && (
         <Button
@@ -137,11 +143,7 @@ export interface SimpleEmptyStateProps {
 }
 
 // No Search Results
-export const NoSearchResults: React.FC<SimpleEmptyStateProps> = ({
-  size = 'md',
-  className,
-  action,
-}) => (
+export const NoSearchResults: React.FC<SimpleEmptyStateProps> = ({ size = 'md', className, action }) => (
   <EmptyState
     title="No results found"
     description="Try adjusting your search or filter to find what you're looking for."
@@ -157,12 +159,7 @@ export interface NoItemsProps extends SimpleEmptyStateProps {
   itemType?: string;
 }
 
-export const NoItems: React.FC<NoItemsProps> = ({
-  itemType = 'items',
-  size = 'md',
-  className,
-  action,
-}) => (
+export const NoItems: React.FC<NoItemsProps> = ({ itemType = 'items', size = 'md', className, action }) => (
   <EmptyState
     title={`No ${itemType} yet`}
     description={`Get started by creating your first ${itemType.slice(0, -1)}.`}
@@ -181,16 +178,12 @@ export const EmptyCart: React.FC<SimpleEmptyStateProps> = ({ size = 'md', classN
     icon={ShoppingCart}
     size={size}
     className={className}
-    action={action || { label: 'Start Shopping', onClick: () => {} }}
+    action={action || { label: 'Start Shopping', onClick: () => { } }}
   />
 );
 
 // No Notifications
-export const NoNotifications: React.FC<SimpleEmptyStateProps> = ({
-  size = 'md',
-  className,
-  action,
-}) => (
+export const NoNotifications: React.FC<SimpleEmptyStateProps> = ({ size = 'md', className, action }) => (
   <EmptyState
     title="No notifications"
     description="You're all caught up! Check back later for updates."
@@ -235,7 +228,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   error = 'Something went wrong',
   onRetry,
   size = 'md',
-  className,
+  className
 }) => (
   <EmptyState
     title="Oops! Something went wrong"
@@ -259,11 +252,7 @@ export const ComingSoon: React.FC<SimpleEmptyStateProps> = ({ size = 'md', class
 );
 
 // Custom with folder icon
-export const NoFolderItems: React.FC<SimpleEmptyStateProps> = ({
-  size = 'md',
-  className,
-  action,
-}) => (
+export const NoFolderItems: React.FC<SimpleEmptyStateProps> = ({ size = 'md', className, action }) => (
   <EmptyState
     title="This folder is empty"
     description="Add items to this folder to get started."

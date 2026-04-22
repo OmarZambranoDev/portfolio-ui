@@ -32,7 +32,11 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   return (
-    <div className={cn(card({ variant, clickable }), className)} {...props}>
+    <div
+      className={cn(card({ variant, clickable }), className)}
+      role={clickable ? 'button' : 'article'}
+      {...props}
+    >
       {children}
     </div>
   );
