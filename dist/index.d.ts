@@ -129,6 +129,7 @@ declare const searchBarInput: (props?: ({
     hasSearchIcon?: boolean | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface SearchBarProps extends VariantProps<typeof searchBarInput> {
+    id?: string;
     value: string;
     onChange: (value: string) => void;
     onSearch?: (value: string) => void;
