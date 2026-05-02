@@ -104,3 +104,10 @@ export {
   type NoItemsProps,
   type ErrorStateProps,
 } from './EmptyState';
+export {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  type TooltipContentProps,
+} from './Tooltip';

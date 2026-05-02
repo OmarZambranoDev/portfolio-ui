@@ -975,6 +975,10 @@ video {
   animation: spin 1s linear infinite;
 }
 
+.cursor-help {
+  cursor: help;
+}
+
 .cursor-not-allowed {
   cursor: not-allowed;
 }
@@ -1162,6 +1166,10 @@ video {
   border-top-width: 1px;
 }
 
+.border-dashed {
+  border-style: dashed;
+}
+
 .border-accent\/30 {
   border-color: rgb(183 141 106 / 0.3);
 }
@@ -1247,6 +1255,11 @@ video {
   background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));
 }
 
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
+
 .bg-muted\/10 {
   background-color: rgb(197 174 150 / 0.1);
 }
@@ -1300,6 +1313,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
+.fill-current {
+  fill: currentColor;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1321,6 +1338,10 @@ video {
   padding: 0.25rem;
 }
 
+.p-12 {
+  padding: 3rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -1339,6 +1360,11 @@ video {
 
 .p-8 {
   padding: 2rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .px-2 {
@@ -1537,6 +1563,10 @@ video {
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity, 1));
+}
+
+.text-inherit {
+  color: inherit;
 }
 
 .text-muted {
@@ -1895,11 +1925,6 @@ video {
   --tw-ring-color: rgb(52 75 51 / 0.2);
 }
 
-.focus\:ring-secondary:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(127 136 110 / var(--tw-ring-opacity, 1));
-}
-
 .focus\:ring-offset-2:focus {
   --tw-ring-offset-width: 2px;
 }
@@ -1918,6 +1943,11 @@ video {
 .focus-visible\:ring-primary:focus-visible {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(52 75 51 / var(--tw-ring-opacity, 1));
+}
+
+.focus-visible\:ring-secondary:focus-visible {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(127 136 110 / var(--tw-ring-opacity, 1));
 }
 
 .focus-visible\:ring-offset-2:focus-visible {

@@ -49,6 +49,7 @@ function App() {
 | Toast | Notification system with success/error/warning/info variants, provider pattern | ✅ |
 | Skeleton | Loading placeholders with pre-built patterns for common layouts | ✅ |
 | EmptyState | Zero-data states with customizable icons, descriptions, and actions | ✅ |
+| Tooltip | Hover tooltip with default/secondary/light/dark variants, instant display | ✅ |
 
 ---
 
@@ -830,6 +831,145 @@ Zero-data state component with pre-built variants for common scenarios.
 
 // Coming soon
 <ComingSoon size="md" />
+```
+
+---
+
+### Tooltip
+
+Hover-activated tooltip built on Radix Tooltip with multiple variants and instant display.
+
+**Setup**
+
+```tsx
+// Wrap your app with TooltipProvider (do this once at the root)
+import { TooltipProvider } from '@portfolio/ui';
+
+function App() {
+  return (
+    <TooltipProvider>
+      <YourAppContent />
+    </TooltipProvider>
+  );
+}
+```
+
+**Content Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'default' \| 'secondary' \| 'light' \| 'dark' | 'default' | Visual style variant |
+| side | 'top' \| 'right' \| 'bottom' \| 'left' | 'bottom' | Open direction |
+| sideOffset | number | 4 | Distance from trigger |
+| children | ReactNode | - | Tooltip content |
+| className | string | - | Additional CSS classes |
+
+**Examples**
+
+```tsx
+// Basic tooltip
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline">Hover me</Button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <p>This is a tooltip</p>
+  </TooltipContent>
+</Tooltip>
+```
+
+```tsx
+// Available variants
+<Tooltip>
+  <TooltipTrigger asChild>
+    <span>Default</span>
+  </TooltipTrigger>
+  <TooltipContent variant="default">
+    <p>Default tooltip</p>
+  </TooltipContent>
+</Tooltip>
+
+<Tooltip>
+  <TooltipTrigger asChild>
+    <span>Light</span>
+  </TooltipTrigger>
+  <TooltipContent variant="light">
+    <p>Light tooltip with border</p>
+  </TooltipContent>
+</Tooltip>
+
+<Tooltip>
+  <TooltipTrigger asChild>
+    <span>Dark</span>
+  </TooltipTrigger>
+  <TooltipContent variant="dark">
+    <p>Dark tooltip</p>
+  </TooltipContent>
+</Tooltip>
+```
+
+```tsx
+// Icon-only button with tooltip
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline" size="sm" className="!p-2">
+      <Settings className="w-4 h-4" />
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <p>Settings</p>
+  </TooltipContent>
+</Tooltip>
+
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline" size="sm" className="!p-2">
+      <Bell className="w-4 h-4" />
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <p>Notifications</p>
+  </TooltipContent>
+</Tooltip>
+```
+
+```tsx
+// Rich content with title, description, and shortcut
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button size="sm">
+      <Plus className="w-4 h-4" />
+      New
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent variant="light" className="w-48">
+    <div className="space-y-2">
+      <p className="font-semibold">Create New</p>
+      <p className="text-xs text-muted">Create a new playlist, folder, or import music.</p>
+      <div className="flex gap-1 text-xs text-muted">
+        <kbd className="px-1 py-0.5 bg-muted/20 rounded">⌘</kbd>
+        <span>+</span>
+        <kbd className="px-1 py-0.5 bg-muted/20 rounded">N</kbd>
+      </div>
+    </div>
+  </TooltipContent>
+</Tooltip>
+```
+
+```tsx
+// Tooltip on disabled button (wrap with span)
+<Tooltip>
+  <TooltipTrigger asChild>
+    <span>
+      <Button disabled className="pointer-events-none">
+        Disabled
+      </Button>
+    </span>
+  </TooltipTrigger>
+  <TooltipContent>
+    <p>Complete the form to enable this button</p>
+  </TooltipContent>
+</Tooltip>
 ```
 
 ---
