@@ -76,6 +76,7 @@ const searchBarInput = cva(
 );
 
 export interface SearchBarProps extends VariantProps<typeof searchBarInput> {
+  id?: string;
   value: string;
   onChange: (value: string) => void;
   onSearch?: (value: string) => void;
@@ -90,6 +91,7 @@ export interface SearchBarProps extends VariantProps<typeof searchBarInput> {
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
+  id,
   value,
   onChange,
   onSearch,
@@ -111,12 +113,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
-  // Sync with external value
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
 
-  // Handle debounced search
   useEffect(() => {
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
@@ -138,7 +138,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     };
   }, [localValue, value, onChange, onSearch, debounceMs]);
 
-  // Handle click outside to close suggestions
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -189,7 +188,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleBlur = () => {
     setIsFocused(false);
-    // Delay hiding suggestions to allow click events
     setTimeout(() => {
       setShowSuggestions(false);
     }, 200);
@@ -220,16 +218,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div ref={wrapperRef} className={cn(searchBarWrapper({ size }), className)}>
       <div className="relative">
-        {/* Search Icon */}
         {showSearchIcon && (
           <div className={cn('absolute top-1/2 -translate-y-1/2', getIconPositionClass())}>
             <Search className="w-4 h-4 text-muted" />
           </div>
         )}
 
-        {/* Input */}
         <input
           ref={inputRef}
+          id={id}
           type="text"
           value={localValue}
           onChange={handleInputChange}
@@ -248,7 +245,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           aria-label={placeholder}
         />
 
-        {/* Right side icons */}
         <div
           className={cn(
             'absolute top-1/2 -translate-y-1/2 flex items-center gap-1',
@@ -271,7 +267,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         </div>
       </div>
 
-      {/* Suggestions Dropdown */}
       {showSuggestions && suggestions.length > 0 && (
         <div className="absolute z-50 w-full mt-1 bg-white border border-muted rounded-lg shadow-lg overflow-hidden">
           <ul className="py-1">

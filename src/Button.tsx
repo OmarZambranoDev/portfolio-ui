@@ -10,9 +10,12 @@ const button = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-white hover:bg-primary-hover active:bg-primary/80 focus-visible:ring-primary',
-        secondary: 'bg-secondary text-white hover:bg-secondary-hover active:bg-secondary/80 focus-visible:ring-secondary',
-        outline: 'border border-primary text-primary bg-transparent hover:bg-muted/20 active:bg-muted/40 focus-visible:ring-primary',
+        primary:
+          'bg-primary text-white hover:bg-primary-hover active:bg-primary/80 focus-visible:ring-primary',
+        secondary:
+          'bg-secondary text-white hover:bg-secondary-hover active:bg-secondary/80 focus-visible:ring-secondary',
+        outline:
+          'border border-primary text-primary bg-transparent hover:bg-muted/20 active:bg-muted/40 focus-visible:ring-primary',
       },
       size: {
         sm: 'px-3 py-1.5 text-sm',
@@ -38,30 +41,24 @@ export interface ButtonProps
   loading?: boolean;
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
-  children,
-  variant,
-  size,
-  disabled,
-  loading = false,
-  className,
-  ...props
-}, ref) => {
-  const isDisabled = disabled || loading;
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, variant, size, disabled, loading = false, className, ...props }, ref) => {
+    const isDisabled = disabled || loading;
 
-  return (
-    <button
-      ref={ref}
-      className={cn(button({ variant, size, disabled: isDisabled }), className)}
-      disabled={isDisabled}
-      aria-busy={loading}
-      {...props}
-    >
-      {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-      {children}
-    </button>
-  );
-});
+    return (
+      <button
+        ref={ref}
+        className={cn(button({ variant, size, disabled: isDisabled }), className)}
+        disabled={isDisabled}
+        aria-busy={loading}
+        {...props}
+      >
+        {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+        {children}
+      </button>
+    );
+  }
+);
 
 Button.displayName = 'Button';
 
