@@ -28,3 +28,5 @@ storybook-static/
 
 tailwind-output.css*.tgz
 src/tailwind-output.css
+
+.npmrc
