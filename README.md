@@ -388,6 +388,7 @@ Search input with debouncing, suggestions, and loading state.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
+| id | string | - | HTML id attribute for label association |
 | value | string | - | Controlled input value |
 | onChange | (value: string) => void | - | Value change handler (debounced) |
 | onSearch | (value: string) => void | - | Called on Enter or after debounce |
