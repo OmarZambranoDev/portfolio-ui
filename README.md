@@ -50,6 +50,7 @@ function App() {
 | Skeleton | Loading placeholders with pre-built patterns for common layouts | ✅ |
 | EmptyState | Zero-data states with customizable icons, descriptions, and actions | ✅ |
 | Tooltip | Hover tooltip with default/secondary/light/dark variants, instant display | ✅ |
+| Table | Data table with sorting, pagination, collapsible header, scrollable body | ✅ |
 
 ---
 
@@ -975,6 +976,156 @@ function App() {
 
 ---
 
+### Table
+
+Data table with sorting, pagination, collapsible header, and scrollable body. Built on TanStack Table.
+
+**Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data | T[] | - | Array of row data |
+| columns | ColumnDef<T>[] | - | Column definitions (use accessorKey for sortable columns) |
+| rowKey | (row: T) => string \| number | - | Unique key extractor for each row |
+| title | string | - | Table title shown in header |
+| collapsible | boolean | false | Makes the table collapsible (requires title) |
+| defaultOpen | boolean | true | Whether collapsible table starts open |
+| clickableRows | boolean | false | Makes rows clickable with hover effect |
+| onRowClick | (row: T) => void | - | Row click handler |
+| sorting | SortingState | - | Controlled sorting state |
+| onSortingChange | (sorting: SortingState) => void | - | Sorting change handler |
+| pagination | boolean | false | Enable pagination |
+| pageSize | number | 20 | Rows per page |
+| variant | 'default' \| 'outlined' \| 'elevated' | 'default' | Visual variant |
+| maxHeight | string | - | Maximum height before scrolling (e.g., '400px') |
+| emptyMessage | string | 'No data available.' | Empty state message |
+| className | string | - | Additional CSS classes |
+
+**Column Definition**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| accessorKey | string | Key in data object (required for sorting) |
+| header | string | Column header text |
+| cell | (info) => ReactNode | Custom cell render function |
+| meta | { align, minWidth, maxWidth } | Column configuration |
+| meta.align | 'left' \| 'center' \| 'right' | Text alignment |
+| meta.minWidth | string \| number | Minimum column width |
+| meta.maxWidth | string \| number | Maximum column width |
+| size | number | Default column width |
+
+**Examples**
+
+```tsx
+// Column definitions with accessorKey for sorting
+const columns: ColumnDef<StockPosition, unknown>[] = [
+  {
+    accessorKey: 'symbol',
+    header: 'Symbol',
+    cell: ({ row }) => (
+      <div>
+        <p className="font-semibold text-earth-forest">{row.original.symbol}</p>
+        <p className="text-xs text-earth-moss">{row.original.companyName}</p>
+      </div>
+    ),
+    size: 120,
+    meta: { align: 'left' },
+  },
+  {
+    accessorKey: 'lastPrice',
+    header: 'Last Price',
+    cell: ({ row }) => `$${row.original.lastPrice.toFixed(2)}`,
+    meta: { align: 'right' },
+  },
+  {
+    accessorKey: 'change',
+    header: 'Change',
+    cell: ({ row }) => {
+      const isPositive = row.original.change >= 0;
+      return (
+        <div className="flex items-center justify-end gap-1">
+          {isPositive ? (
+            <TrendingUp className="w-3 h-3 text-earth-forest" />
+          ) : (
+            <TrendingDown className="w-3 h-3 text-danger" />
+          )}
+          <span className={`font-medium ${isPositive ? 'text-earth-forest' : 'text-danger'}`}>
+            {isPositive ? '+' : ''}{row.original.change.toFixed(2)}
+          </span>
+        </div>
+      );
+    },
+    meta: { align: 'right' },
+  },
+];
+
+// Usage
+<Table
+  data={positions}
+  columns={columns}
+  rowKey={(row) => row.symbol}
+  title="Positions"
+  collapsible
+  clickableRows
+  onRowClick={(row) => console.log(row.symbol)}
+  maxHeight="400px"
+/>
+```
+
+```tsx
+// Simple table with Chip component
+const columns: ColumnDef<User, unknown>[] = [
+  { accessorKey: 'name', header: 'Name', meta: { align: 'left' } },
+  { accessorKey: 'role', header: 'Role', meta: { align: 'left' } },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => (
+      <Chip size="sm" variant={row.original.status === 'active' ? 'primary' : 'default'}>
+        {row.original.status}
+      </Chip>
+    ),
+    meta: { align: 'center' },
+  },
+];
+
+<Table
+  data={users}
+  columns={columns}
+  rowKey={(row) => row.name}
+  title="Team Members"
+  variant="outlined"
+/>
+```
+
+```tsx
+// Two tables sharing vertical space
+<div className="flex flex-col h-full">
+  <div className="flex-1 min-h-0">
+    <Table
+      data={positionsData}
+      columns={positionColumns}
+      rowKey={(row) => row.symbol}
+      title="Positions"
+      collapsible
+      maxHeight="100%"
+    />
+  </div>
+  <div className="flex-1 min-h-0">
+    <Table
+      data={watchlistData}
+      columns={watchlistColumns}
+      rowKey={(row) => row.symbol}
+      title="Watchlist"
+      collapsible
+      maxHeight="100%"
+    />
+  </div>
+</div>
+```
+
+---
+
 ## Design Tokens
 
 ### Earth Theme Colors
@@ -1023,19 +1174,61 @@ npm run dev
 npm run storybook
 ```
 
-## Local Publishing (Verdaccio)
+## Publishing (GitHub Packages)
 
+This package is published to GitHub Packages. Make sure you're authenticated:
 ```bash
-# Start Verdaccio (in separate terminal)
-verdaccio
+npm login --registry=https://npm.pkg.github.com
+# Username: your GitHub username
+# Password: a GitHub Personal Access Token with packages:read and packages:write
+```
 
-# Build and publish
+Build and publish:
+```bash
 npm run build
 npm version patch
-npm publish --registry http://localhost:4873
+npm publish
+```
 
-# Install in consuming apps
-npm install @portfolio/ui@latest --registry http://localhost:4873
+## Installation (Consuming Apps)
+
+Add to your app's `package.json`:
+
+```json
+{
+  "dependencies": {
+    "@OmarZambranoDev/portfolio-ui": "^0.0.26"
+  }
+}
+```
+
+Create `.npmrc` with the GitHub Packages registry:
+
+```text
+@OmarZambranoDev:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=ghp_your_token
+```
+
+Add `.npmrc` to `.gitignore` so your token is never committed:
+
+```bash
+echo ".npmrc" >> .gitignore
+```
+
+Then install:
+
+```bash
+npm install
+```
+
+## CI Setup (GitHub Actions)
+
+Add `packages: read` permission to your workflow:
+
+```yaml
+permissions:
+  contents: read
+  packages: read
 ```
 
 ## License
