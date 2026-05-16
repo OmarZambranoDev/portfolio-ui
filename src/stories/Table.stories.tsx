@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { Table, type ColumnDef } from '../Table';
 import { Chip } from '../Chip';
 import { TrendingUp, TrendingDown } from 'lucide-react';
@@ -15,7 +16,6 @@ const meta: Meta<typeof Table> = {
 export default meta;
 type Story = StoryObj<typeof Table>;
 
-// Sample data
 interface StockPosition {
   symbol: string;
   companyName: string;
@@ -227,6 +227,34 @@ const sampleData: StockPosition[] = [
   },
 ];
 
+const largeSampleData: StockPosition[] = Array.from({ length: 20 }, (_, i) => ({
+  symbol: ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'META', 'NVDA', 'JPM', 'V', 'WMT'][i % 10],
+  companyName: [
+    'Apple Inc.',
+    'Microsoft Corp.',
+    'Alphabet Inc.',
+    'Amazon.com',
+    'Tesla Inc.',
+    'Meta Platforms',
+    'NVIDIA Corp.',
+    'JPMorgan Chase',
+    'Visa Inc.',
+    'Walmart Inc.',
+  ][i % 10],
+  lastPrice: 100 + Math.random() * 400,
+  change: (Math.random() - 0.5) * 10,
+  changePercent: (Math.random() - 0.5) * 5,
+  todayGain: (Math.random() - 0.5) * 500,
+  todayGainPercent: (Math.random() - 0.5) * 3,
+  totalGain: (Math.random() - 0.5) * 5000,
+  totalGainPercent: (Math.random() - 0.5) * 40,
+  value: 5000 + Math.random() * 20000,
+  accountPercent: 5 + Math.random() * 20,
+  quantity: Math.floor(Math.random() * 200) + 10,
+  avgCost: 80 + Math.random() * 300,
+  costBasis: 5000 + Math.random() * 15000,
+}));
+
 export const PositionsTable: Story = {
   render: () => (
     <div className="w-[1100px]">
@@ -238,7 +266,6 @@ export const PositionsTable: Story = {
         collapsible
         clickableRows
         onRowClick={(row) => console.log('Clicked:', row.symbol)}
-        maxHeight="400px"
       />
     </div>
   ),
@@ -256,10 +283,43 @@ export const WithPagination: Story = {
         clickableRows
         pagination
         pageSize={3}
-        maxHeight="400px"
       />
     </div>
   ),
+};
+
+export const StackedTables: Story = {
+  render: () => {
+    const [topCollapsed, setTopCollapsed] = useState(false);
+    const [bottomCollapsed, setBottomCollapsed] = useState(false);
+
+    return (
+      <div className="flex flex-col gap-2 w-[1100px] h-[80vh]">
+        <Table
+          data={largeSampleData}
+          columns={stockColumns}
+          rowKey={(row, index) => `${row.symbol}-${index}`}
+          title="Positions"
+          collapsible
+          defaultOpen={!topCollapsed}
+          onCollapsedChange={setTopCollapsed}
+          clickableRows
+          className={topCollapsed ? '' : 'flex-1 min-h-0'}
+        />
+        <Table
+          data={largeSampleData}
+          columns={stockColumns}
+          rowKey={(row, index) => `${row.symbol}-${index}`}
+          title="Watchlist"
+          collapsible
+          defaultOpen={!bottomCollapsed}
+          onCollapsedChange={setBottomCollapsed}
+          clickableRows
+          className={bottomCollapsed ? '' : 'flex-1 min-h-0'}
+        />
+      </div>
+    );
+  },
 };
 
 export const SimpleTable: Story = {
@@ -303,13 +363,7 @@ export const SimpleTable: Story = {
 
     return (
       <div className="w-[500px]">
-        <Table
-          data={data}
-          columns={columns}
-          rowKey={(row) => row.name}
-          title="Team Members"
-          variant="outlined"
-        />
+        <Table data={data} columns={columns} rowKey={(row) => row.name} title="Team Members" />
       </div>
     );
   },

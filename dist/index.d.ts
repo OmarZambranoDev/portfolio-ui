@@ -8,7 +8,6 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { LucideIcon } from 'lucide-react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { ColumnDef, SortingState } from '@tanstack/react-table';
-export { ColumnDef } from '@tanstack/react-table';
 
 declare function cn(...inputs: ClassValue[]): string;
 
@@ -343,42 +342,29 @@ interface TooltipContentProps extends React.ComponentPropsWithoutRef<typeof Tool
 }
 declare const TooltipContent: React.ForwardRefExoticComponent<TooltipContentProps & React.RefAttributes<HTMLDivElement>>;
 
+interface TableColumnMeta {
+    align?: 'left' | 'center' | 'right';
+    minWidth?: string | number;
+    maxWidth?: string | number;
+}
 interface TableProps<TData> {
-    /** Row data */
     data: TData[];
-    /** Column definitions - use accessorKey for sortable columns */
     columns: ColumnDef<TData, unknown>[];
-    /** Unique key accessor for each row */
-    rowKey: (row: TData) => string | number;
-    /** Table title shown in the header */
+    rowKey: (row: TData, index: number) => string | number;
     title?: string;
-    /** Makes the table collapsible (requires title) */
     collapsible?: boolean;
-    /** Whether the table is open by default */
     defaultOpen?: boolean;
-    /** Makes rows clickable */
+    onCollapsedChange?: (collapsed: boolean) => void;
     clickableRows?: boolean;
-    /** Row click handler */
     onRowClick?: (row: TData) => void;
-    /** Controlled sorting state */
     sorting?: SortingState;
-    /** Sorting change handler */
     onSortingChange?: (sorting: SortingState) => void;
-    /** Enable pagination */
     pagination?: boolean;
-    /** Page size for pagination */
     pageSize?: number;
-    /** Visual variant */
-    variant?: 'default' | 'outlined' | 'elevated';
-    /** Additional CSS classes for the container */
     className?: string;
-    /** Table caption */
     caption?: string;
-    /** Maximum height before scrolling */
-    maxHeight?: string;
-    /** Empty state message */
     emptyMessage?: string;
 }
-declare function Table<TData>({ data, columns, rowKey, title, collapsible, defaultOpen, clickableRows, onRowClick, sorting: controlledSorting, onSortingChange, pagination, pageSize, variant, className, caption, maxHeight, emptyMessage, }: TableProps<TData>): JSX.Element;
+declare function Table<TData>({ data, columns, rowKey, title, collapsible, defaultOpen, onCollapsedChange, clickableRows, onRowClick, sorting: controlledSorting, onSortingChange, pagination, pageSize, className, caption, emptyMessage, }: TableProps<TData>): JSX.Element;
 
-export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, ComingSoon, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EmptyCart, EmptyState, type EmptyStateProps, ErrorState, type ErrorStateProps, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, NoData, NoItems, type NoItemsProps, NoMessages, NoNotifications, NoSearchResults, SearchBar, type SearchBarProps, type SimpleEmptyStateProps, Skeleton, SkeletonAvatar, type SkeletonAvatarProps, SkeletonCard, type SkeletonCardProps, SkeletonChart, type SkeletonChartProps, SkeletonForm, type SkeletonFormProps, SkeletonGrid, type SkeletonGridProps, SkeletonList, type SkeletonListProps, type SkeletonProps, SkeletonTable, type SkeletonTableProps, SkeletonText, type SkeletonTextProps, Table, type TableProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, type ToastProps, ToastProvider, type ToastVariant, Tooltip, TooltipContent, type TooltipContentProps, TooltipProvider, TooltipTrigger, cn, useToast };
+export { Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, ComingSoon, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EmptyCart, EmptyState, type EmptyStateProps, ErrorState, type ErrorStateProps, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, NoData, NoItems, type NoItemsProps, NoMessages, NoNotifications, NoSearchResults, SearchBar, type SearchBarProps, type SimpleEmptyStateProps, Skeleton, SkeletonAvatar, type SkeletonAvatarProps, SkeletonCard, type SkeletonCardProps, SkeletonChart, type SkeletonChartProps, SkeletonForm, type SkeletonFormProps, SkeletonGrid, type SkeletonGridProps, SkeletonList, type SkeletonListProps, type SkeletonProps, SkeletonTable, type SkeletonTableProps, SkeletonText, type SkeletonTextProps, Table, type TableColumnMeta, type TableProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, type ToastProps, ToastProvider, type ToastVariant, Tooltip, TooltipContent, type TooltipContentProps, TooltipProvider, TooltipTrigger, cn, useToast };
