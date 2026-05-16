@@ -111,4 +111,4 @@ export {
   TooltipContent,
   type TooltipContentProps,
 } from './Tooltip';
-export { Table, type TableProps, type TableColumnMeta } from './Table';
+export { Table, type TableProps, type TableColumnMeta, type ColumnDef } from './Table';

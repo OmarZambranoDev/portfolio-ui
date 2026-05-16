@@ -8,6 +8,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { LucideIcon } from 'lucide-react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { ColumnDef, SortingState } from '@tanstack/react-table';
+export { ColumnDef } from '@tanstack/react-table';
 
 declare function cn(...inputs: ClassValue[]): string;
 
