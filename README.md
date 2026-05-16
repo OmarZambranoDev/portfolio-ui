@@ -986,18 +986,17 @@ Data table with sorting, pagination, collapsible header, and scrollable body. Bu
 |------|------|---------|-------------|
 | data | T[] | - | Array of row data |
 | columns | ColumnDef<T>[] | - | Column definitions (use accessorKey for sortable columns) |
-| rowKey | (row: T) => string \| number | - | Unique key extractor for each row |
+| rowKey | (row: T, index: number) => string \| number | - | Unique key extractor for each row |
 | title | string | - | Table title shown in header |
 | collapsible | boolean | false | Makes the table collapsible (requires title) |
 | defaultOpen | boolean | true | Whether collapsible table starts open |
+| onCollapsedChange | (collapsed: boolean) => void | - | Called when collapse state changes |
 | clickableRows | boolean | false | Makes rows clickable with hover effect |
 | onRowClick | (row: T) => void | - | Row click handler |
 | sorting | SortingState | - | Controlled sorting state |
 | onSortingChange | (sorting: SortingState) => void | - | Sorting change handler |
 | pagination | boolean | false | Enable pagination |
 | pageSize | number | 20 | Rows per page |
-| variant | 'default' \| 'outlined' \| 'elevated' | 'default' | Visual variant |
-| maxHeight | string | - | Maximum height before scrolling (e.g., '400px') |
 | emptyMessage | string | 'No data available.' | Empty state message |
 | className | string | - | Additional CSS classes |
 
@@ -1068,7 +1067,6 @@ const columns: ColumnDef<StockPosition, unknown>[] = [
   collapsible
   clickableRows
   onRowClick={(row) => console.log(row.symbol)}
-  maxHeight="400px"
 />
 ```
 
@@ -1094,7 +1092,6 @@ const columns: ColumnDef<User, unknown>[] = [
   columns={columns}
   rowKey={(row) => row.name}
   title="Team Members"
-  variant="outlined"
 />
 ```
 
@@ -1108,7 +1105,6 @@ const columns: ColumnDef<User, unknown>[] = [
       rowKey={(row) => row.symbol}
       title="Positions"
       collapsible
-      maxHeight="100%"
     />
   </div>
   <div className="flex-1 min-h-0">
@@ -1118,7 +1114,6 @@ const columns: ColumnDef<User, unknown>[] = [
       rowKey={(row) => row.symbol}
       title="Watchlist"
       collapsible
-      maxHeight="100%"
     />
   </div>
 </div>
