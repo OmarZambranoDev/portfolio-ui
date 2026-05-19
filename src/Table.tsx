@@ -128,7 +128,7 @@ export function Table<TData>({
   return (
     <div
       className={cn(
-        'flex flex-col border border-earth-stone/70 rounded-lg bg-white',
+        'flex flex-col border border-earth-stone/70 rounded-lg bg-white overflow-hidden',
         collapsed ? 'flex-none' : 'flex-1 min-h-0',
         className
       )}
@@ -259,7 +259,7 @@ export function Table<TData>({
               </table>
             </div>
             {canScroll && (
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-earth-stone/20 to-transparent pointer-events-none rounded-b-lg" />
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-earth-stone/20 to-transparent pointer-events-none" />
             )}
           </div>
 
