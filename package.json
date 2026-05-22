@@ -35,7 +35,7 @@
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "publish:patch": "npm version patch && git push --follow-tags && npm publish && npm dist-tag add @OmarZambranoDev/portfolio-ui@$(npm pkg get version | tr -d '\"') latest"
+    "publish:patch": "npm version patch && git push --follow-tags && npm publish && npm dist-tag add @OmarZambranoDev/portfolio-ui@$(npm pkg get version | tr -d '\"') latest --registry=https://npm.pkg.github.com"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
