@@ -1956,8 +1956,8 @@ video {
   border-color: rgb(52 75 51 / 0.5);
 }
 
-.hover\:bg-earth-stone\/10:hover {
-  background-color: rgb(197 174 150 / 0.1);
+.hover\:bg-earth-stone\/20:hover {
+  background-color: rgb(197 174 150 / 0.2);
 }
 
 .hover\:bg-muted\/10:hover {

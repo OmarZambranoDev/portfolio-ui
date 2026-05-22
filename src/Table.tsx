@@ -232,7 +232,7 @@ export function Table<TData>({
                         onClick={() => clickableRows && onRowClick?.(row.original)}
                         className={cn(
                           'border-b border-earth-stone/10 transition-colors bg-white',
-                          clickableRows && 'cursor-pointer hover:bg-earth-stone/10'
+                          clickableRows && 'cursor-pointer hover:bg-earth-stone/20'
                         )}
                       >
                         {row.getVisibleCells().map((cell) => {
@@ -241,7 +241,7 @@ export function Table<TData>({
                             <td
                               key={cell.id}
                               className={cn(
-                                'py-2.5 bg-white',
+                                'py-2.5',
                                 meta.align === 'center' && 'text-center',
                                 meta.align === 'right' && 'text-right',
                                 !meta.align && 'text-left',
