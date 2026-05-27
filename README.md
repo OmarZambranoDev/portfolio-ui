@@ -51,6 +51,7 @@ function App() {
 | EmptyState | Zero-data states with customizable icons, descriptions, and actions | ✅ |
 | Tooltip | Hover tooltip with default/secondary/light/dark variants, instant display | ✅ |
 | Table | Data table with sorting, pagination, collapsible header, scrollable body | ✅ |
+| Avatar | User profile image with loading skeleton, fallback initials, sm/md/lg/xl sizes | ✅ |
 
 ---
 
@@ -1121,6 +1122,65 @@ const columns: ColumnDef<User, unknown>[] = [
 
 ---
 
+### Avatar
+
+User profile image with loading state, error fallback, and size variants. Built on Radix Avatar.
+
+**Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| src | string | - | Image URL |
+| alt | string | - | Alt text (used to derive initials if no fallback) |
+| size | 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Component size |
+| fallback | string | - | Custom initials (auto-derived from alt if not provided) |
+| className | string | - | Additional CSS classes |
+
+**Examples**
+
+```typescript
+<Avatar src="https://i.pravatar.cc/200" alt="Jane Doe" size="md" />
+<Avatar src="https://i.pravatar.cc/200" alt="John Smith" size="sm" />
+<Avatar src="https://i.pravatar.cc/200" alt="Mary Johnson" size="lg" />
+<Avatar src="https://i.pravatar.cc/200" alt="Robert Brown" size="xl" />
+```
+
+```typescript
+// Auto-generated initials from alt text
+<Avatar src="/broken-image.jpg" alt="Jane Doe" size="lg" />
+// Shows "JD"
+
+// Custom fallback initials
+<Avatar src="/broken-image.jpg" alt="John Smith" fallback="JS" size="lg" />
+// Shows "JS"
+
+// Single name
+<Avatar src="/broken-image.jpg" alt="Madonna" size="lg" />
+// Shows "M"
+```
+
+```typescript
+// Post header with avatar
+<div className="flex items-center gap-3">
+  <Avatar src={user.avatar} alt={user.name} size="md" />
+  <div>
+    <p className="font-semibold text-earth-forest">{user.name}</p>
+    <p className="text-xs text-earth-moss">@{user.handle} • 2h ago</p>
+  </div>
+</div>
+
+// Comment thread
+<div className="flex items-start gap-3">
+  <Avatar src={comment.author.avatar} alt={comment.author.name} size="sm" />
+  <div>
+    <p className="text-sm font-semibold text-earth-forest">{comment.author.name}</p>
+    <p className="text-sm text-earth-moss">{comment.text}</p>
+  </div>
+</div>
+```
+
+---
+
 ## Design Tokens
 
 ### Earth Theme Colors
@@ -1192,7 +1252,7 @@ Add to your app's `package.json`:
 ```json
 {
   "dependencies": {
-    "@OmarZambranoDev/portfolio-ui": "^0.0.26"
+    "@OmarZambranoDev/portfolio-ui": "0.0.26"
   }
 }
 ```
