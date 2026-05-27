@@ -112,3 +112,4 @@ export {
   type TooltipContentProps,
 } from './Tooltip';
 export { Table, type TableProps, type TableColumnMeta, type ColumnDef } from './Table';
+export { Avatar, type AvatarProps } from './Avatar';
