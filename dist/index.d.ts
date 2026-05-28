@@ -379,4 +379,32 @@ interface AvatarProps extends React.ComponentPropsWithoutRef<typeof AvatarPrimit
 }
 declare const Avatar: React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLSpanElement>>;
 
-export { Avatar, type AvatarProps, Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, ComingSoon, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EmptyCart, EmptyState, type EmptyStateProps, ErrorState, type ErrorStateProps, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, NoData, NoItems, type NoItemsProps, NoMessages, NoNotifications, NoSearchResults, SearchBar, type SearchBarProps, type SimpleEmptyStateProps, Skeleton, SkeletonAvatar, type SkeletonAvatarProps, SkeletonCard, type SkeletonCardProps, SkeletonChart, type SkeletonChartProps, SkeletonForm, type SkeletonFormProps, SkeletonGrid, type SkeletonGridProps, SkeletonList, type SkeletonListProps, type SkeletonProps, SkeletonTable, type SkeletonTableProps, SkeletonText, type SkeletonTextProps, Table, type TableColumnMeta, type TableProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, type ToastProps, ToastProvider, type ToastVariant, Tooltip, TooltipContent, type TooltipContentProps, TooltipProvider, TooltipTrigger, cn, useToast };
+declare const badge: (props?: ({
+    variant?: "primary" | "danger" | "muted" | null | undefined;
+    size?: "sm" | "md" | "dot" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface BadgeProps extends VariantProps<typeof badge> {
+    count: number;
+    max?: number;
+    className?: string;
+}
+declare const Badge: React.FC<BadgeProps>;
+
+interface Notification {
+    id: string;
+    type: 'like' | 'comment' | 'friend_request' | 'system';
+    message: string;
+    timestamp: number;
+    read: boolean;
+    actionUrl?: string;
+    onAction?: () => void;
+}
+interface NotificationCenterProps {
+    notifications: Notification[];
+    onNotificationClick: (notification: Notification) => void;
+    onMarkAllRead: () => void;
+    className?: string;
+}
+declare const NotificationCenter: React.FC<NotificationCenterProps>;
+
+export { Avatar, type AvatarProps, Badge, type BadgeProps, Button, type ButtonProps, Card, CardContent, type CardContentProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardImage, type CardImageProps, type CardProps, CardTitle, type CardTitleProps, Chip, type ChipProps, ComingSoon, DropdownMenu, DropdownMenuContent, type DropdownMenuContentProps, DropdownMenuItem, type DropdownMenuItemProps, DropdownMenuLabel, type DropdownMenuLabelProps, DropdownMenuPortal, DropdownMenuSeparator, type DropdownMenuSeparatorProps, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EmptyCart, EmptyState, type EmptyStateProps, ErrorState, type ErrorStateProps, Modal, ModalBody, type ModalBodyProps, ModalClose, ModalContent, type ModalContentProps, ModalDescription, type ModalDescriptionProps, ModalDialog, type ModalDialogProps, ModalFooter, type ModalFooterProps, ModalHeader, type ModalHeaderProps, ModalOverlay, ModalPortal, ModalTitle, type ModalTitleProps, ModalTrigger, NoData, NoItems, type NoItemsProps, NoMessages, NoNotifications, NoSearchResults, type Notification, NotificationCenter, type NotificationCenterProps, SearchBar, type SearchBarProps, type SimpleEmptyStateProps, Skeleton, SkeletonAvatar, type SkeletonAvatarProps, SkeletonCard, type SkeletonCardProps, SkeletonChart, type SkeletonChartProps, SkeletonForm, type SkeletonFormProps, SkeletonGrid, type SkeletonGridProps, SkeletonList, type SkeletonListProps, type SkeletonProps, SkeletonTable, type SkeletonTableProps, SkeletonText, type SkeletonTextProps, Table, type TableColumnMeta, type TableProps, Tabs, TabsContent, type TabsContentProps, TabsList, type TabsListProps, TabsTrigger, type TabsTriggerProps, type ToastOptions, type ToastProps, ToastProvider, type ToastVariant, Tooltip, TooltipContent, type TooltipContentProps, TooltipProvider, TooltipTrigger, cn, useToast };

@@ -113,3 +113,9 @@ export {
 } from './Tooltip';
 export { Table, type TableProps, type TableColumnMeta, type ColumnDef } from './Table';
 export { Avatar, type AvatarProps } from './Avatar';
+export { Badge, type BadgeProps } from './Badge';
+export {
+  NotificationCenter,
+  type NotificationCenterProps,
+  type Notification,
+} from './NotificationCenter';
