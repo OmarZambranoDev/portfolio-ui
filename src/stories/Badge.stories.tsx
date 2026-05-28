@@ -13,7 +13,7 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'danger', 'muted'],
+      options: ['burnt', 'primary', 'danger', 'muted'],
     },
     size: {
       control: { type: 'select' },
@@ -28,7 +28,6 @@ type Story = StoryObj<typeof Badge>;
 export const Default: Story = {
   args: {
     count: 5,
-    variant: 'primary',
     size: 'md',
   },
 };
@@ -47,9 +46,10 @@ export const MaxDisplay: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex gap-4 items-center">
-      <Badge count={5} variant="primary" />
+      <Badge count={5} variant="burnt" />
       <Badge count={3} variant="danger" />
       <Badge count={12} variant="muted" />
+      <Badge count={7} variant="primary" />
     </div>
   ),
 };
@@ -107,11 +107,11 @@ export const OnIcon: Story = {
     <div className="flex gap-6">
       <div className="relative">
         <Bell className="w-6 h-6 text-earth-sage" />
-        <Badge count={5} size="sm" className="absolute -top-2 -right-1" />
+        <Badge count={5} size="sm" className="absolute -top-1 -right-1" />
       </div>
       <div className="relative">
         <Mail className="w-6 h-6 text-earth-sage" />
-        <Badge count={23} size="sm" variant="danger" className="absolute -top-2 -right-1" />
+        <Badge count={23} size="sm" variant="danger" className="absolute -top-1 -right-1" />
       </div>
       <div className="relative">
         <ShoppingCart className="w-6 h-6 text-earth-sage" />

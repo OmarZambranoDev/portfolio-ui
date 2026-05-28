@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { Heart, MessageCircle, UserPlus, Info } from 'lucide-react';
 import { NotificationCenter, type Notification } from '../NotificationCenter';
 import '../../dist/index.css';
 
@@ -17,38 +18,38 @@ type Story = StoryObj<typeof NotificationCenter>;
 const sampleNotifications: Notification[] = [
   {
     id: '1',
-    type: 'like',
     message: 'Sarah Wilson liked your post',
-    timestamp: Date.now() - 1000 * 60 * 5, // 5 min ago
+    timestamp: Date.now() - 1000 * 60 * 5,
     read: false,
+    icon: <Heart className="w-5 h-5 text-danger" />,
   },
   {
     id: '2',
-    type: 'comment',
-    message: 'Mike Johnson commented: "Looks great! Love the earth tones."',
-    timestamp: Date.now() - 1000 * 60 * 30, // 30 min ago
+    message: 'Mike Johnson commented: "Looks great!"',
+    timestamp: Date.now() - 1000 * 60 * 30,
     read: false,
+    icon: <MessageCircle className="w-5 h-5 text-earth-forest" />,
   },
   {
     id: '3',
-    type: 'friend_request',
     message: 'Emily Chen sent you a friend request',
-    timestamp: Date.now() - 1000 * 60 * 60 * 2, // 2 hours ago
+    timestamp: Date.now() - 1000 * 60 * 60 * 2,
     read: false,
+    icon: <UserPlus className="w-5 h-5 text-earth-sage" />,
   },
   {
     id: '4',
-    type: 'system',
     message: 'Your profile has been updated successfully',
-    timestamp: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
+    timestamp: Date.now() - 1000 * 60 * 60 * 24,
     read: true,
+    icon: <Info className="w-5 h-5 text-earth-moss" />,
   },
   {
     id: '5',
-    type: 'like',
     message: 'David Martinez liked your comment',
-    timestamp: Date.now() - 1000 * 60 * 60 * 48, // 2 days ago
+    timestamp: Date.now() - 1000 * 60 * 60 * 48,
     read: true,
+    icon: <Heart className="w-5 h-5 text-danger" />,
   },
 ];
 
@@ -67,12 +68,38 @@ export const Default: Story = {
       setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
     };
 
+    const handleRemove = (id: string) => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
+    };
+
     return (
       <div className="flex justify-end w-[400px]">
         <NotificationCenter
           notifications={notifications}
           onNotificationClick={handleNotificationClick}
           onMarkAllRead={handleMarkAllRead}
+          onRemove={handleRemove}
+        />
+      </div>
+    );
+  },
+};
+
+export const WithRemove: Story = {
+  render: () => {
+    const [notifications, setNotifications] = useState(sampleNotifications);
+
+    const handleRemove = (id: string) => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
+    };
+
+    return (
+      <div className="flex justify-end w-[400px]">
+        <NotificationCenter
+          notifications={notifications}
+          onNotificationClick={() => {}}
+          onMarkAllRead={() => {}}
+          onRemove={handleRemove}
         />
       </div>
     );
@@ -112,7 +139,7 @@ export const SocialAppExample: Story = {
     const [notifications, setNotifications] = useState(sampleNotifications);
 
     const handleNotificationClick = (notification: Notification) => {
-      console.log('Navigate based on type:', notification.type);
+      console.log('Navigate based on notification:', notification.id);
       setNotifications((prev) =>
         prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n))
       );
@@ -122,13 +149,23 @@ export const SocialAppExample: Story = {
       setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
     };
 
+    const handleRemove = (id: string) => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
+    };
+
     return (
-      <div className="flex justify-end w-[400px]">
-        <NotificationCenter
-          notifications={notifications}
-          onNotificationClick={handleNotificationClick}
-          onMarkAllRead={handleMarkAllRead}
-        />
+      <div className="space-y-4 w-[450px]">
+        <div className="flex justify-end">
+          <NotificationCenter
+            notifications={notifications}
+            onNotificationClick={handleNotificationClick}
+            onMarkAllRead={handleMarkAllRead}
+            onRemove={handleRemove}
+          />
+        </div>
+        <div className="text-xs text-muted text-center">
+          Hover over a notification to see the remove button
+        </div>
       </div>
     );
   },

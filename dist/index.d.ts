@@ -380,7 +380,7 @@ interface AvatarProps extends React.ComponentPropsWithoutRef<typeof AvatarPrimit
 declare const Avatar: React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLSpanElement>>;
 
 declare const badge: (props?: ({
-    variant?: "primary" | "danger" | "muted" | null | undefined;
+    variant?: "primary" | "danger" | "muted" | "burnt" | null | undefined;
     size?: "sm" | "md" | "dot" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 interface BadgeProps extends VariantProps<typeof badge> {
@@ -392,10 +392,10 @@ declare const Badge: React.FC<BadgeProps>;
 
 interface Notification {
     id: string;
-    type: 'like' | 'comment' | 'friend_request' | 'system';
     message: string;
     timestamp: number;
     read: boolean;
+    icon?: React.ReactNode;
     actionUrl?: string;
     onAction?: () => void;
 }
@@ -403,6 +403,8 @@ interface NotificationCenterProps {
     notifications: Notification[];
     onNotificationClick: (notification: Notification) => void;
     onMarkAllRead: () => void;
+    onRemove?: (notificationId: string) => void;
+    dotColor?: string;
     className?: string;
 }
 declare const NotificationCenter: React.FC<NotificationCenterProps>;

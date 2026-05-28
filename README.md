@@ -51,8 +51,8 @@ function App() {
 | EmptyState | Zero-data states with customizable icons, descriptions, and actions | ✅ |
 | Tooltip | Hover tooltip with default/secondary/light/dark variants, instant display | ✅ |
 | Table | Data table with sorting, pagination, collapsible header, scrollable body | ✅ |
-| Badge | Count indicator with auto-dot, max display, primary/danger/muted variants | ✅ |
-| NotificationCenter | Notification bell with dropdown panel, type icons, read/unread state | ✅ |
+| Badge | Count indicator with auto-dot, burnt/primary/danger/muted variants | ✅ |
+| NotificationCenter | Notification bell with dropdown panel, customizable icons, remove button | ✅ |
 | Avatar | User profile image with loading skeleton, fallback initials, sm/md/lg/xl sizes | ✅ |
 
 ---
@@ -1185,7 +1185,7 @@ User profile image with loading state, error fallback, and size variants. Built 
 
 ### Badge
 
-Count indicator for icons, buttons, and avatars. Auto-switches to dot at small sizes for large counts.
+Count indicator for icons, buttons, and avatars. Auto-switches to dot at small sizes for large counts. Defaults to burnt orange.
 
 **Props**
 
@@ -1193,14 +1193,14 @@ Count indicator for icons, buttons, and avatars. Auto-switches to dot at small s
 |------|------|---------|-------------|
 | count | number | - | Number to display (hidden if 0 or negative) |
 | max | number | 99 | Maximum display count (shows "99+" when exceeded) |
-| variant | 'primary' \| 'danger' \| 'muted' | 'primary' | Color variant |
+| variant | 'burnt' \| 'primary' \| 'danger' \| 'muted' | 'burnt' | Color variant |
 | size | 'sm' \| 'md' | 'md' | Component size (sm auto-switches to dot for 3+ chars) |
 | className | string | - | Additional CSS classes |
 
 **Examples**
 
 ```tsx
-<Badge count={5} variant="primary" size="md" />
+<Badge count={5} /> // Default burnt
 <Badge count={150} max={99} /> // Shows "99+"
 <Badge count={0} /> // Renders nothing
 ```
@@ -1213,17 +1213,16 @@ Count indicator for icons, buttons, and avatars. Auto-switches to dot at small s
 ```
 
 ```tsx
-// sm size auto-switches to dot for 3+ character text (like "99+")
+// sm size auto-switches to dot for 3+ character text
 <Badge count={5} size="sm" />   // Shows "5"
-<Badge count={12} size="sm" />  // Shows "12"
-<Badge count={999} size="sm" /> // Shows dot (text too long for small circle)
+<Badge count={999} size="sm" /> // Shows dot
 ```
 
 ---
 
 ### NotificationCenter
 
-Notification bell with dropdown panel showing notifications by type. Uses existing DropdownMenu and Badge components.
+Notification bell with dropdown panel. Each app provides its own icons and colors per notification.
 
 **Props**
 
@@ -1232,6 +1231,8 @@ Notification bell with dropdown panel showing notifications by type. Uses existi
 | notifications | Notification[] | - | Array of notification objects |
 | onNotificationClick | (notification: Notification) => void | - | Called when a notification is clicked |
 | onMarkAllRead | () => void | - | Called when "Mark all read" is clicked |
+| onRemove | (notificationId: string) => void | - | Called when a notification is removed |
+| dotColor | string | 'bg-earth-burnt' | CSS class for the unread dot color |
 | className | string | - | Additional CSS classes |
 
 **Notification Object**
@@ -1239,10 +1240,10 @@ Notification bell with dropdown panel showing notifications by type. Uses existi
 | Field | Type | Description |
 |-------|------|-------------|
 | id | string | Unique identifier |
-| type | 'like' \| 'comment' \| 'friend_request' \| 'system' | Notification type (determines icon) |
 | message | string | Notification text |
 | timestamp | number | Unix timestamp in milliseconds |
 | read | boolean | Whether the notification has been read |
+| icon | ReactNode | Icon element (each app provides its own) |
 | actionUrl | string | Optional URL for navigation |
 | onAction | () => void | Optional callback for click handling |
 
@@ -1251,17 +1252,13 @@ Notification bell with dropdown panel showing notifications by type. Uses existi
 ```tsx
 const [notifications, setNotifications] = useState(sampleNotifications);
 
-const handleNotificationClick = (notification: Notification) => {
-  // Handle navigation based on notification type
-  setNotifications((prev) =>
-    prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n))
-  );
-};
-
 <NotificationCenter
   notifications={notifications}
-  onNotificationClick={handleNotificationClick}
-  onMarkAllRead={() => setNotifications(prev => prev.map(n => ({ ...n, read: true })))}
+  onNotificationClick={(n) => {
+    setNotifications(prev => prev.map(p => p.id === n.id ? { ...p, read: true } : p));
+  }}
+  onMarkAllRead={() => setNotifications(prev => prev.map(p => ({ ...p, read: true })))}
+  onRemove={(id) => setNotifications(prev => prev.filter(p => p.id !== id))}
 />
 ```
 

@@ -10,6 +10,7 @@ const badge = cva('rounded-full flex items-center justify-center font-medium', {
       primary: 'bg-primary text-white',
       danger: 'bg-danger text-white',
       muted: 'bg-earth-stone text-white',
+      burnt: 'bg-earth-burnt text-white',
     },
     size: {
       sm: 'w-5 h-5 text-[10px]',
@@ -18,7 +19,7 @@ const badge = cva('rounded-full flex items-center justify-center font-medium', {
     },
   },
   defaultVariants: {
-    variant: 'primary',
+    variant: 'burnt',
     size: 'md',
   },
 });
@@ -32,7 +33,7 @@ export interface BadgeProps extends VariantProps<typeof badge> {
 export const Badge: React.FC<BadgeProps> = ({
   count,
   max = 99,
-  variant = 'primary',
+  variant,
   size = 'md',
   className,
 }) => {

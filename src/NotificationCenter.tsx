@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Bell, Heart, MessageCircle, UserPlus, Info } from 'lucide-react';
+import { Bell, X } from 'lucide-react';
 import { cn } from './lib/utils';
 import { Button } from './Button';
 import { Badge } from './Badge';
@@ -9,10 +9,10 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from './Dropdo
 
 export interface Notification {
   id: string;
-  type: 'like' | 'comment' | 'friend_request' | 'system';
   message: string;
   timestamp: number;
   read: boolean;
+  icon?: React.ReactNode;
   actionUrl?: string;
   onAction?: () => void;
 }
@@ -21,22 +21,10 @@ export interface NotificationCenterProps {
   notifications: Notification[];
   onNotificationClick: (notification: Notification) => void;
   onMarkAllRead: () => void;
+  onRemove?: (notificationId: string) => void;
+  dotColor?: string;
   className?: string;
 }
-
-const typeIcons = {
-  like: Heart,
-  comment: MessageCircle,
-  friend_request: UserPlus,
-  system: Info,
-};
-
-const typeColors = {
-  like: 'text-red-500',
-  comment: 'text-blue-500',
-  friend_request: 'text-earth-forest',
-  system: 'text-earth-sage',
-};
 
 const getRelativeTime = (timestamp: number): string => {
   const now = Date.now();
@@ -56,6 +44,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   notifications,
   onNotificationClick,
   onMarkAllRead,
+  onRemove,
+  dotColor = 'bg-earth-burnt',
   className,
 }) => {
   const unreadCount = notifications.filter((n) => !n.read).length;
@@ -68,9 +58,10 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
+        <Button
+          variant="outline"
           className={cn(
-            'relative p-2 rounded-md transition-colors',
+            'relative !p-2 !rounded-md !border-0 !ring-0 !ring-offset-0 outline-none',
             hasUnread
               ? 'text-primary hover:bg-muted/20'
               : 'text-earth-sage hover:text-earth-forest hover:bg-muted/10',
@@ -82,7 +73,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
           {hasUnread && (
             <Badge count={unreadCount} size="sm" className="absolute -top-0.5 -right-0.5" />
           )}
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80 p-0">
         {/* Header */}
@@ -103,25 +94,31 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               <p className="text-sm text-muted">No notifications</p>
             </div>
           ) : (
-            notifications.map((notification) => {
-              const IconComponent = typeIcons[notification.type];
-              const iconColor = typeColors[notification.type];
-
-              return (
+            notifications.map((notification) => (
+              <div
+                key={notification.id}
+                className={cn(
+                  'relative flex items-start gap-3 px-4 py-3 transition-colors hover:bg-muted/10 group',
+                  !notification.read && 'bg-earth-stone/10'
+                )}
+              >
                 <button
-                  key={notification.id}
                   onClick={() => handleNotificationClick(notification)}
-                  className={cn(
-                    'w-full flex items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/10',
-                    !notification.read && 'bg-earth-stone/10'
-                  )}
+                  className="flex items-start gap-3 flex-1 min-w-0 text-left"
                 >
-                  <div className="relative shrink-0">
-                    <IconComponent className={cn('w-5 h-5', iconColor)} />
-                    {!notification.read && (
-                      <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-blue-500 rounded-full" />
-                    )}
-                  </div>
+                  {notification.icon && (
+                    <span className="relative shrink-0">
+                      {notification.icon}
+                      {!notification.read && (
+                        <span
+                          className={cn(
+                            'absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full',
+                            dotColor
+                          )}
+                        />
+                      )}
+                    </span>
+                  )}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-earth-forest line-clamp-2">{notification.message}</p>
                     <p className="text-xs text-muted mt-0.5">
@@ -129,8 +126,20 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     </p>
                   </div>
                 </button>
-              );
-            })
+
+                {onRemove && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onRemove(notification.id)}
+                    className="!p-1 !rounded-md !border-0 text-earth-forest hover:text-danger hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-all shrink-0"
+                    aria-label="Remove notification"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </Button>
+                )}
+              </div>
+            ))
           )}
         </div>
       </DropdownMenuContent>

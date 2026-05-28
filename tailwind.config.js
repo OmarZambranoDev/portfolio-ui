@@ -23,6 +23,7 @@ export default {
           clay: '#a07d5c',
           warm: '#d4bfa8',
           rose: '#b3423a',
+          burnt: '#cc5500',
         },
       },
     },
