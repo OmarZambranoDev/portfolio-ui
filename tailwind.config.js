@@ -14,6 +14,8 @@ export default {
         'muted-hover': '#d4bfa8',
         danger: '#b3423a',
         'danger-hover': '#96362f',
+        burnt: '#cc5500',
+        'burnt-hover': '#b34a00',
         earth: {
           forest: '#344b33',
           sand: '#b78d6a',

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Bell, X } from 'lucide-react';
 import { cn } from './lib/utils';
 import { Button } from './Button';
@@ -48,15 +48,25 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   dotColor = 'bg-earth-burnt',
   className,
 }) => {
+  const [open, setOpen] = useState(false);
   const unreadCount = notifications.filter((n) => !n.read).length;
   const hasUnread = unreadCount > 0;
 
   const handleNotificationClick = (notification: Notification) => {
     onNotificationClick(notification);
+    setOpen(false);
+  };
+
+  const handleMarkAllRead = () => {
+    onMarkAllRead();
+  };
+
+  const handleRemove = (id: string) => {
+    onRemove?.(id);
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
@@ -80,7 +90,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         <div className="flex items-center justify-between px-4 py-3 border-b border-muted/30">
           <h3 className="text-sm font-semibold text-primary">Notifications</h3>
           {hasUnread && (
-            <Button variant="outline" size="sm" onClick={onMarkAllRead}>
+            <Button variant="outline" size="sm" onClick={handleMarkAllRead}>
               Mark all read
             </Button>
           )}
@@ -131,7 +141,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => onRemove(notification.id)}
+                    onClick={() => handleRemove(notification.id)}
                     className="!p-1 !rounded-md !border-0 text-earth-forest hover:text-danger hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-all shrink-0"
                     aria-label="Remove notification"
                   >
