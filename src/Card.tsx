@@ -7,12 +7,12 @@ import { cn } from './lib/utils';
 const card = cva('rounded-lg border overflow-hidden transition-all duration-300', {
   variants: {
     variant: {
-      default: 'bg-white border-muted md:hover:shadow-lg',
-      elevated: 'bg-white border-transparent shadow-md md:hover:shadow-lg',
+      default: 'bg-white border-muted supports-hover:hover:shadow-lg',
+      elevated: 'bg-white border-transparent shadow-md supports-hover:hover:shadow-lg',
       outline: 'bg-transparent border-primary',
     },
     clickable: {
-      true: 'cursor-pointer md:hover:scale-[1.02] md:hover:border-primary/50',
+      true: 'cursor-pointer supports-hover:hover:scale-[1.02] supports-hover:hover:border-primary/50',
     },
   },
   defaultVariants: {
