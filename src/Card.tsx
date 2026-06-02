@@ -4,15 +4,15 @@ import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './lib/utils';
 
-const card = cva('rounded-lg border overflow-hidden transition-all duration-300 hover:shadow-lg', {
+const card = cva('rounded-lg border overflow-hidden transition-all duration-300', {
   variants: {
     variant: {
-      default: 'bg-white border-muted',
-      elevated: 'bg-white border-transparent shadow-md',
+      default: 'bg-white border-muted md:hover:shadow-lg',
+      elevated: 'bg-white border-transparent shadow-md md:hover:shadow-lg',
       outline: 'bg-transparent border-primary',
     },
     clickable: {
-      true: 'cursor-pointer hover:scale-[1.02] hover:border-primary/50',
+      true: 'cursor-pointer md:hover:scale-[1.02] md:hover:border-primary/50',
     },
   },
   defaultVariants: {
