@@ -6,16 +6,16 @@ import { Loader2 } from 'lucide-react';
 import { cn } from './lib/utils';
 
 const button = cva(
-  'rounded font-medium transition-colors inline-flex items-center justify-center gap-2 supports-hover:active:scale-[0.98] transition-transform',
+  'rounded font-medium transition-colors inline-flex items-center justify-center gap-2 active:scale-[0.98] transition-transform',
   {
     variants: {
       variant: {
         primary:
-          'bg-primary text-white hover:bg-primary-hover supports-hover:active:bg-primary/80 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus:outline-none',
+          'bg-primary text-white active:bg-primary/80 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus:outline-none',
         secondary:
-          'bg-secondary text-white hover:bg-secondary-hover supports-hover:active:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary focus:outline-none',
+          'bg-secondary text-white active:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary focus:outline-none',
         outline:
-          'border border-primary text-primary bg-transparent hover:bg-muted/20 supports-hover:active:bg-muted/40 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus:outline-none',
+          'border border-primary text-primary bg-transparent active:bg-muted/40 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus:outline-none',
       },
       size: {
         sm: 'px-3 py-1.5 text-sm',
@@ -33,6 +33,12 @@ const button = cva(
   }
 );
 
+const hoverClasses = {
+  primary: 'btn-hover-primary',
+  secondary: 'btn-hover-secondary',
+  outline: 'btn-hover-outline',
+};
+
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
     VariantProps<typeof button> {
@@ -42,13 +48,20 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, variant, size, disabled, loading = false, className, ...props }, ref) => {
+  (
+    { children, variant = 'primary', size, disabled, loading = false, className, ...props },
+    ref
+  ) => {
     const isDisabled = disabled || loading;
 
     return (
       <button
         ref={ref}
-        className={cn(button({ variant, size, disabled: isDisabled }), className)}
+        className={cn(
+          button({ variant, size, disabled: isDisabled }),
+          hoverClasses[variant || 'primary'],
+          className
+        )}
         disabled={isDisabled}
         aria-busy={loading}
         {...props}

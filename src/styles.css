@@ -7,3 +7,17 @@
     transform: translateX(100%);
   }
 }
+
+@media (hover: hover) {
+  .btn-hover-primary:hover {
+    background-color: #4a5d3e;
+  }
+
+  .btn-hover-secondary:hover {
+    background-color: #6b7359;
+  }
+
+  .btn-hover-outline:hover {
+    background-color: rgba(197, 174, 150, 0.2);
+  }
+}
