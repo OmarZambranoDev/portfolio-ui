@@ -6,16 +6,16 @@ import { Loader2 } from 'lucide-react';
 import { cn } from './lib/utils';
 
 const button = cva(
-  'rounded font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 active:scale-[0.98] transition-transform',
+  'rounded font-medium transition-colors inline-flex items-center justify-center gap-2 active:scale-[0.98] transition-transform',
   {
     variants: {
       variant: {
         primary:
-          'bg-primary text-white hover:bg-primary-hover active:bg-primary/80 focus-visible:ring-primary',
+          'bg-primary text-white hover:bg-primary-hover active:bg-primary/80 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus:outline-none',
         secondary:
-          'bg-secondary text-white hover:bg-secondary-hover active:bg-secondary/80 focus-visible:ring-secondary',
+          'bg-secondary text-white hover:bg-secondary-hover active:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary focus:outline-none',
         outline:
-          'border border-primary text-primary bg-transparent hover:bg-muted/20 active:bg-muted/40 focus-visible:ring-primary',
+          'border border-primary text-primary bg-transparent hover:bg-muted/20 active:bg-muted/40 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary focus:outline-none',
       },
       size: {
         sm: 'px-3 py-1.5 text-sm',
@@ -45,12 +45,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, variant, size, disabled, loading = false, className, ...props }, ref) => {
     const isDisabled = disabled || loading;
 
+    const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+      // Remove focus on mobile touch after tap
+      if ('ontouchstart' in window) {
+        e.currentTarget.blur();
+      }
+      props.onBlur?.(e);
+    };
+
     return (
       <button
         ref={ref}
         className={cn(button({ variant, size, disabled: isDisabled }), className)}
         disabled={isDisabled}
         aria-busy={loading}
+        onBlur={handleBlur}
         {...props}
       >
         {loading && <Loader2 className="h-4 w-4 animate-spin" />}
