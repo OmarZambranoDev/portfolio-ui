@@ -54,6 +54,7 @@ function App() {
 | Badge | Count indicator with auto-dot, burnt/primary/danger/muted variants | ✅ |
 | NotificationCenter | Notification bell with dropdown panel, customizable icons, remove button | ✅ |
 | Avatar | User profile image with loading skeleton, fallback initials, sm/md/lg/xl sizes | ✅ |
+| StatCard | Compact stat display with icon, value, label, trend indicator | ✅ |
 
 ---
 
@@ -1260,6 +1261,70 @@ const [notifications, setNotifications] = useState(sampleNotifications);
   onMarkAllRead={() => setNotifications(prev => prev.map(p => ({ ...p, read: true })))}
   onRemove={(id) => setNotifications(prev => prev.filter(p => p.id !== id))}
 />
+```
+
+---
+
+### StatCard
+
+Compact card displaying an icon, value, label, and optional trend indicator. Reusable across weather, travel, trade, and social apps.
+
+**Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| icon | LucideIcon | - | Icon component (use Lucide icons) |
+| value | string | - | Primary value displayed (e.g., "72°F", "$45K") |
+| label | string | - | Descriptive label below the value |
+| trend | 'up' \| 'down' \| 'neutral' | - | Optional trend direction with arrow icon |
+| trendLabel | string | - | Trend description (e.g., "+12.5%", "No change") |
+| variant | 'default' \| 'primary' \| 'accent' | 'default' | Visual style variant |
+| size | 'sm' \| 'md' \| 'lg' | 'md' | Component size |
+| clickable | boolean | false | Adds cursor pointer and hover effect |
+| onClick | () => void | - | Click handler (requires clickable) |
+| className | string | - | Additional CSS classes |
+
+**Examples**
+
+```typescript
+<StatCard icon={Thermometer} value="72°F" label="Current temp" />
+<StatCard icon={DollarSign} value="$45,280" label="Portfolio value" variant="primary" />
+<StatCard icon={Sun} value="June-Aug" label="Best season" size="sm" />
+```
+
+```typescript
+<StatCard
+  icon={TrendingUp}
+  value="+$1,240"
+  label="Today's gain"
+  trend="up"
+  trendLabel="+2.8%"
+/>
+
+<StatCard
+  icon={Droplets}
+  value="45%"
+  label="Humidity"
+  trend="down"
+  trendLabel="-5%"
+/>
+
+<StatCard
+  icon={Wind}
+  value="12 mph"
+  label="Wind speed"
+  trend="neutral"
+  trendLabel="No change"
+/>
+```
+
+```typescript
+<div className="grid grid-cols-2 gap-4">
+  <StatCard icon={Thermometer} value="72°F" label="Temperature" variant="default" />
+  <StatCard icon={Droplets} value="45%" label="Humidity" variant="default" />
+  <StatCard icon={Wind} value="12 mph" label="Wind Speed" variant="default" />
+  <StatCard icon={Droplets} value="20%" label="Rain Chance" trend="up" trendLabel="+5%" variant="default" />
+</div>
 ```
 
 ---

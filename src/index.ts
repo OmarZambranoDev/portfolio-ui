@@ -119,3 +119,4 @@ export {
   type NotificationCenterProps,
   type Notification,
 } from './NotificationCenter';
+export { StatCard, type StatCardProps } from './StatCard';
