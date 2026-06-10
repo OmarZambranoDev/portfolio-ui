@@ -1,6 +1,6 @@
 {
   "name": "@omarzambranodev/portfolio-ui",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "type": "module",
   "description": "Shared UI components for portfolio micro-frontends",
   "main": "dist/index.js",
