@@ -2032,6 +2032,10 @@ video {
   .chip-hover:hover {
     background-color: rgba(197, 174, 150, 0.3);
   }
+
+  .chip-selected-hover:hover {
+    background-color: #4a5d3e;
+  }
 }
 
 .placeholder\:text-muted::-moz-placeholder {

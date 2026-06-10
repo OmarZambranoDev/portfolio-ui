@@ -50,7 +50,12 @@ export const Chip: React.FC<ChipProps> = ({
 }) => {
   return (
     <span
-      className={cn(chip({ variant, size, clickable }), clickable && 'chip-hover', className)}
+      className={cn(
+        chip({ variant, size, clickable }),
+        clickable && 'chip-hover',
+        clickable && variant === 'selected' && 'chip-selected-hover',
+        className
+      )}
       aria-disabled={disabled}
       {...props}
     >

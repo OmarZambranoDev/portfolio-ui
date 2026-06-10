@@ -80,6 +80,19 @@ export const Clickable: Story = {
   },
 };
 
+export const SelectedClickable: Story = {
+  render: () => (
+    <div className="flex gap-2 flex-wrap">
+      <Chip variant="selected" clickable onClick={() => alert('Clicked!')}>
+        Selected
+      </Chip>
+      <Chip variant="selected" clickable onClick={() => alert('Clicked!')}>
+        Active Filter
+      </Chip>
+    </div>
+  ),
+};
+
 export const AllVariants: Story = {
   render: () => (
     <div className="flex gap-2 flex-wrap">
