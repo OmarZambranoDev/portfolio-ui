@@ -1327,6 +1327,16 @@ Compact card displaying an icon, value, label, and optional trend indicator. Reu
 </div>
 ```
 
+```typescript
+<StatCard
+  icon={Thermometer}
+  value="72°F"
+  label="View details"
+  clickable
+  onClick={() => console.log('StatCard clicked!')}
+/>
+```
+
 ---
 
 ## Design Tokens
