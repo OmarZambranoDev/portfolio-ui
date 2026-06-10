@@ -1,3 +1,5 @@
+import { ColumnDef, SortingState } from '@tanstack/react-table';
+export { ColumnDef } from '@tanstack/react-table';
 import { ClassValue } from 'clsx';
 import * as class_variance_authority_types from 'class-variance-authority/types';
 import React from 'react';
@@ -7,8 +9,6 @@ import * as TabsPrimitive from '@radix-ui/react-tabs';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { LucideIcon } from 'lucide-react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import { ColumnDef, SortingState } from '@tanstack/react-table';
-export { ColumnDef } from '@tanstack/react-table';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 
 declare function cn(...inputs: ClassValue[]): string;
