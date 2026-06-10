@@ -20,4 +20,8 @@
   .btn-hover-outline:hover {
     background-color: rgba(197, 174, 150, 0.2);
   }
+
+  .chip-hover:hover {
+    background-color: rgba(197, 174, 150, 0.3);
+  }
 }

@@ -88,6 +88,7 @@ export const AllVariants: Story = {
       <Chip variant="secondary">Secondary</Chip>
       <Chip variant="outline">Outline</Chip>
       <Chip variant="accent">Accent</Chip>
+      <Chip variant="selected">Active</Chip>
     </div>
   ),
 };

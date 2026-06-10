@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './lib/utils';
 
 const chip = cva(
-  'inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2',
+  'inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
@@ -14,6 +14,7 @@ const chip = cva(
         secondary: 'bg-secondary/10 text-secondary border border-secondary/30',
         outline: 'bg-transparent text-primary border border-primary/40',
         accent: 'bg-accent/10 text-accent border border-accent/30',
+        selected: 'bg-primary text-white border border-primary',
       },
       size: {
         sm: 'px-2 py-0.5 text-xs',
@@ -21,7 +22,7 @@ const chip = cva(
         lg: 'px-4 py-1.5 text-base',
       },
       clickable: {
-        true: 'cursor-pointer hover:bg-muted/30',
+        true: 'cursor-pointer',
       },
     },
     defaultVariants: {
@@ -49,7 +50,7 @@ export const Chip: React.FC<ChipProps> = ({
 }) => {
   return (
     <span
-      className={cn(chip({ variant, size, clickable }), className)}
+      className={cn(chip({ variant, size, clickable }), clickable && 'chip-hover', className)}
       aria-disabled={disabled}
       {...props}
     >

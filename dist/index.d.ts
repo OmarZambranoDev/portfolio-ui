@@ -56,7 +56,7 @@ interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 declare const CardFooter: React.FC<CardFooterProps>;
 
 declare const chip: (props?: ({
-    variant?: "primary" | "secondary" | "outline" | "default" | "accent" | null | undefined;
+    variant?: "primary" | "secondary" | "outline" | "default" | "accent" | "selected" | null | undefined;
     size?: "sm" | "md" | "lg" | null | undefined;
     clickable?: boolean | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
