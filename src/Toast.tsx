@@ -70,14 +70,6 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     setToasts((prev) => prev.map((toast) => ({ ...toast, open: false })));
   }, []);
 
-  const handleOpenChange = useCallback((id: string, open: boolean) => {
-    if (!open) {
-      setTimeout(() => {
-        setToasts((prev) => prev.filter((toast) => toast.id !== id));
-      }, 200);
-    }
-  }, []);
-
   const value = useMemo(
     () => ({
       toast,
@@ -102,7 +94,13 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
               duration={duration}
               action={action}
               open={open}
-              onOpenChange={(open) => handleOpenChange(id, open)}
+              onOpenChange={(newOpen) => {
+                if (!newOpen) {
+                  setTimeout(() => {
+                    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+                  }, 200);
+                }
+              }}
             />
           )
         )}

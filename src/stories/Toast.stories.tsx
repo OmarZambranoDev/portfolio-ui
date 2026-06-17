@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ToastProvider, useToast } from '../Toast';
 import { Button } from '../Button';
-import { Card, CardContent, CardTitle, CardDescription } from '../Card';
+import { Card, CardContent, CardTitle } from '../Card';
 import '../../dist/index.css';
 
 const meta: Meta<typeof ToastProvider> = {
