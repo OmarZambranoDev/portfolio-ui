@@ -55,6 +55,12 @@ function App() {
 | NotificationCenter | Notification bell with dropdown panel, customizable icons, remove button | ✅ |
 | Avatar | User profile image with loading skeleton, fallback initials, sm/md/lg/xl sizes | ✅ |
 | StatCard | Compact stat display with icon, value, label, trend indicator | ✅ |
+| Label | Accessible form label with sm/md/lg sizes | ✅ |
+| Input | Text input with default/filled/minimal variants and error state | ✅ |
+| Textarea | Multi-line input with default/filled variants and error state | ✅ |
+| Select | Dropdown select built on Radix Select | ✅ |
+| Checkbox | Single checkbox built on Radix Checkbox | ✅ |
+| RadioGroup | Radio button group built on Radix RadioGroup | ✅ |
 
 ---
 
@@ -1335,6 +1341,161 @@ Compact card displaying an icon, value, label, and optional trend indicator. Reu
   clickable
   onClick={() => console.log('StatCard clicked!')}
 />
+```
+
+---
+
+### Label
+
+Accessible label component built on Radix Label. Links to form inputs via `htmlFor`.
+
+**Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| htmlFor | string | - | ID of the associated form element |
+| size | 'sm' \| 'md' \| 'lg' | 'md' | Text size |
+| children | ReactNode | - | Label content |
+| className | string | - | Additional CSS classes |
+
+**Examples**
+
+```tsx
+<Label htmlFor="email">Email address</Label>
+<Input id="email" type="email" />
+
+<Label size="sm">Small label</Label>
+```
+
+---
+
+### Input
+
+Text input with default, filled, and minimal variants. Supports error state.
+
+**Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'default' \| 'filled' \| 'minimal' | 'default' | Visual style variant |
+| error | boolean | false | Shows error border and ring |
+| className | string | - | Additional CSS classes |
+
+Plus all standard HTML input attributes (type, placeholder, disabled, etc.).
+
+**Examples**
+
+```tsx
+<Input placeholder="Default input" />
+<Input variant="filled" placeholder="Filled input" />
+<Input variant="minimal" placeholder="Minimal input" />
+<Input error placeholder="Error state" />
+<Input disabled placeholder="Disabled" />
+```
+
+---
+
+### Textarea
+
+Multi-line text input with default and filled variants.
+
+**Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'default' \| 'filled' | 'default' | Visual style variant |
+| error | boolean | false | Shows error border and ring |
+| className | string | - | Additional CSS classes |
+
+Plus all standard HTML textarea attributes (rows, placeholder, disabled, etc.).
+
+**Examples**
+
+```tsx
+<Textarea placeholder="Enter your message..." rows={4} />
+<Textarea variant="filled" placeholder="Filled textarea" />
+<Textarea error placeholder="Error state" />
+```
+
+---
+
+### Select
+
+Dropdown select built on Radix Select. Compound component with Trigger, Content, and Item.
+
+**Sub-Components**
+
+- `Select` - Root component
+- `SelectTrigger` - Button that opens the dropdown (prop: error)
+- `SelectValue` - Displays the selected value
+- `SelectContent` - Dropdown panel
+- `SelectGroup` - Groups related items
+- `SelectItem` - Individual selectable option
+
+**Examples**
+
+```tsx
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a country" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="us">United States</SelectItem>
+    <SelectItem value="uk">United Kingdom</SelectItem>
+    <SelectItem value="ca">Canada</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+---
+
+### Checkbox
+
+Single checkbox built on Radix Checkbox. Works with Label via `htmlFor`.
+
+**Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultChecked | boolean | - | Initially checked state |
+| checked | boolean | - | Controlled checked state |
+| onCheckedChange | (checked: boolean) => void | - | Change handler |
+| disabled | boolean | false | Disables the checkbox |
+| className | string | - | Additional CSS classes |
+
+**Examples**
+
+```tsx
+<div className="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">I accept the terms</Label>
+</div>
+```
+
+---
+
+### RadioGroup
+
+Radio button group built on Radix RadioGroup.
+
+**Sub-Components**
+
+- `RadioGroup` - Root component (props: defaultValue, value, onValueChange)
+- `RadioGroupItem` - Individual radio button
+
+**Examples**
+
+```tsx
+<RadioGroup defaultValue="all">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="all" id="all" />
+    <Label htmlFor="all">All notifications</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="none" id="none" />
+    <Label htmlFor="none">None</Label>
+  </div>
+</RadioGroup>
 ```
 
 ---
