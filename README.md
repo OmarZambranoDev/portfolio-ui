@@ -116,12 +116,13 @@ Container component with compound sub-components for flexible layouts.
 | clickable | boolean | false | Adds cursor pointer and hover effects |
 | children | ReactNode | - | Card content |
 | className | string | - | Additional CSS classes |
+| size | 'sm' \| 'md' \| 'lg' | 'md' | Text size |
 
 **Sub-Components**
 
 - `CardImage` - Image container (props: src, alt, className)
 - `CardContent` - Content wrapper (props: children, className)
-- `CardTitle` - Card heading (props: children, className)
+- `CardTitle` - Card heading (props: children, className, size)
 - `CardDescription` - Descriptive text (props: children, className)
 - `CardFooter` - Footer section with muted background (props: children, className)
 

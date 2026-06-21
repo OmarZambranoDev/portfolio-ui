@@ -67,15 +67,27 @@ export const CardContent: React.FC<CardContentProps> = ({ children, className, .
   );
 };
 
-export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg';
 }
 
-export const CardTitle: React.FC<CardTitleProps> = ({ children, className, ...props }) => {
+export const CardTitle: React.FC<CardTitleProps> = ({
+  children,
+  size = 'md',
+  className,
+  ...props
+}) => {
+  const sizeClasses = {
+    sm: 'text-base',
+    md: 'text-lg',
+    lg: 'text-xl',
+  };
+
   return (
-    <h3 className={cn('text-lg font-semibold text-primary mb-1', className)} {...props}>
+    <div className={cn('font-semibold text-primary mb-1', sizeClasses[size], className)} {...props}>
       {children}
-    </h3>
+    </div>
   );
 };
 

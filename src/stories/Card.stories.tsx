@@ -49,6 +49,31 @@ export const Default: Story = {
   },
 };
 
+export const TitleSizes: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <Card>
+        <CardContent>
+          <CardTitle size="sm">Small Title</CardTitle>
+          <CardDescription>text-base font size</CardDescription>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <CardTitle size="md">Medium Title</CardTitle>
+          <CardDescription>text-lg font size (default)</CardDescription>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <CardTitle size="lg">Large Title</CardTitle>
+          <CardDescription>text-xl font size</CardDescription>
+        </CardContent>
+      </Card>
+    </div>
+  ),
+};
+
 export const Elevated: Story = {
   args: {
     variant: 'elevated',

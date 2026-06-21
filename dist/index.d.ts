@@ -46,8 +46,9 @@ interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 }
 declare const CardContent: React.FC<CardContentProps>;
-interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
+    size?: 'sm' | 'md' | 'lg';
 }
 declare const CardTitle: React.FC<CardTitleProps>;
 interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
